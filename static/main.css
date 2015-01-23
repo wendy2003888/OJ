@@ -1,25 +1,35 @@
-.navbar_right li{
+.navigation li{
 	display: inline-block;
-	float: right;
 	border-top: 20px;
 	right: 30px;
 }
 
-.nav{
-
+.navigation .navbar{
+	font-weight: bold;
+	padding-top: 20px;
 }
-.navbar li{
-	display: inline-block;
+
+/*.navigation .navbar .right{
+	float: right;
+}*/
+
+.navigation .navbar .bar{
 	margin-top: 50px;
 }
-
 .jumbotron{
-	background-color: #F0F8FF;
-	border: 10px solid rgb(230, 230, 250);
+	/*color: inherit;*/
+	padding: 30px 15px;
+  	margin-bottom: 30px;
+	/*color: rgb(230, 230, 250);*/
+	background-color: rgb(210, 227, 235);/**/
+	border: 20px solid rgb(245, 245, 245);
 }
 
-.Head{
+.jumbotron .Head{
+	/*background-color: rgb(206, 228, 251);*/
+	color: Gray;
 	margin-top: auto;
 	margin-left: auto;
-	padding: 10px;
+	padding: 5px;
 }
+
