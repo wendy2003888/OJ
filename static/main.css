@@ -1,0 +1,25 @@
+.navbar_right li{
+	display: inline-block;
+	float: right;
+	border-top: 20px;
+	right: 30px;
+}
+
+.nav{
+
+}
+.navbar li{
+	display: inline-block;
+	margin-top: 50px;
+}
+
+.jumbotron{
+	background-color: #F0F8FF;
+	border: 10px solid rgb(230, 230, 250);
+}
+
+.Head{
+	margin-top: auto;
+	margin-left: auto;
+	padding: 10px;
+}
