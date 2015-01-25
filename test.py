@@ -1,9 +1,9 @@
 from flask import Flask, url_for, render_template, request
 from forms import RegisterForm
-from fileconfig import Registererr
-
+from config import Useriderr, Passworderr
 
 app = Flask(__name__)
+
 app.config.from_object('config')
 
 @app.route('/')
@@ -17,18 +17,20 @@ def Login():
 @app.route("/sign_up", methods = ['GET', 'POST'])
 def Sign_up():
 	form = RegisterForm()
-	if(request.method == 'GET' ):
-		return render_template("sign_up.html", form = form)
-	else:
-		if form.validate():
-			error = None
+	if(request.method == 'POST' ):
+		if not form.validate_userid():
+			error = Useriderr
+		elif not form.valiate_password():
+			error = Passworderr
 		else:
-			error = Registererr
-	if error == None :
-		return render_template('homepage.html')
-	else:
-		return render_template('sign_up.html', form = form, error = error)
+			error = None
+		if error == None :
+			return render_template('homepage.html')
+		else:
+			return render_template('sign_up.html', form = form, error = error)
+	return render_template("sign_up.html", form = form)
 
 
 if __name__ == '__main__':
-	app.run(debug = True)
+	app.run()
+

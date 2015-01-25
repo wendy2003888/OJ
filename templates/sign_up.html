@@ -1,29 +1,17 @@
-<html>
-	<head>
-		<link href = "../static/bootstrap.css"  rel = "stylesheet">
-	</head>
-	<div>
-	    <form action = "/sign_up" method="POST">
-	        {{ form.csrf_token }}
-	        <center><h2> Register Information </h2></center>
-	        {% if error %}
-	            <center><h3 class="error"> {{ error }}</h3></center>
-	        {% endif %}
+{% from "_formhelpers.html" import render_field %}
 
-	        <table id = "register">
-	            <tr>
-	                <td>{{ form.UserID.label }}</td>
-	                <td>{{ form.UserID(size = 20) }}</td>
-	            </tr>
-	            <tr>
-	                <td>{{ form.password.label }}</td>
-	                <td>{{ form.password(size = 20) }}</td>
-	            </tr>
-	            <tr>
-	                <td></td>
-	                <td><input type="submit" value="Submit" name="submit"><input type = "reset" value="Reset" name="reset"></td>
-	            </tr>
-	        </table>
-	    </form>
-	</div>
-</html>
+<form action = "/sign_up" method= post>
+    <center><h2> Register Information </h2></center>
+
+    <dl>
+	    {{ render_field(form.userid) }}
+	    {{ render_field(form.password) }}
+	    {{ render_field(form.confirm) }}
+	</dl>
+
+    <input type="submit" value="Go">
+	<table id = "sign_up">
+        <p><input type="submit" value="Submit" name="submit"><input type = "reset" value="Reset" name="reset"></p>  
+        </tr>
+    </table> 
+</form>
