@@ -1,29 +1,51 @@
-<!DOCTYPE html>
-<html>
-	<head>
-	  <meta charset="utf-8">
-	  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	  <title>Login Form</title>
-	  <link rel="stylesheet" href="../static/loginstyle.css">
-	  <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-	</head>
-	<body>
-	  <form method="POST" action="/login" class="login">
-	    <p>
-	      <label for="login">userID</label>
-	      <input type="text" name="login" id="login" value="username">
-	    </p>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<head>
+<!--   <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> -->
+  <title>Login Form</title>
+  <link rel="stylesheet" href="../static/loginstyle.css">
+  <!--[if lt IE 9]><script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+</head>
+<!-- <body>
+  <form method="POST" action="/login" class="login">
+    <p>
+      <label for="login">Email:</label>
+      <input type="text" name="login" id="login" value="name@example.com">
+    </p>
 
-	    <p>
-	      <label for="password">Password:</label>
-	      <input type="password" name="password" id="password" value="123456">
-	    </p>
+    <p>
+      <label for="password">Password:</label>
+      <input type="password" name="password" id="password" value="4815162342">
+    </p>
 
-	    <p class="login-submit">
-	      <button type="submit" class="login-button">Login</button>
-	    </p>
+    <p class="login-submit">
+      <button type="submit" class="login-button">Login</button>
+    </p>
 
-	    <!-- <p class="forgot-password"><a href="index.html">Forgot your password?</a></p> -->
-	  </form>
-	</body>
-</html>
+    <p class="forgot-password"><a href="index.html">Forgot your password?</a></p>
+  </form>
+ </body>
+ -->
+
+<form action = "/login" method="POST" class="login">
+        {{ form.csrf_token }}
+        {% if error %}
+            <center> <h3 class="error"> {{ error }} </h3> </center>
+        {% endif %}
+
+        <table id = "register">
+            <tr>
+                <td><label for="userid">User ID:</label></td>
+                <td>{{ form.userid(size = 20) }}</td>
+            </tr>
+            
+            <tr>
+              <td><label for="password">Password:</label></td>
+              <td>{{ form.password(size = 20) }}</td>
+            </tr>
+        </table>
+        <p class="login-submit">
+            <button type="submit" class="login-button">Login</button>
+        </p>
+</form>

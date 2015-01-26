@@ -15,12 +15,13 @@
         </tr>
     </table> 
 </form> -->
-
+<head>
+    <center><h2> Register Information </h2></center>
+</head>
 <form action = "/sign_up" method="POST">
         {{ form.csrf_token }}
-        <center><h2> Register Information </h2></center>
         {% if error %}
-            <center><h3 class="error"> {{ error }}</h3></center>
+            <center> <h3 class="error"> {{ error }} </h3> </center>
         {% endif %}
 
         <table id = "register">
