@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<!-- {% from "_formhelpers.html" import render_field %}
+
+<form action = "/sign_up" method= post>
+    <center><h2> Register Information </h2></center>
+
+    <dl>
+	    {{ render_field(form.userid) }}
+	    {{ render_field(form.password) }}
+	    {{ render_field(form.confirm) }}
+	</dl>
+	<table id = "sign_up">
+        <p><input type="submit" value="Submit" name="submit"><input type = "reset" value="Reset" name="reset"></p>  
+        </tr>
+    </table> 
+</form> -->
+
+<form action = "/sign_up" method="POST">
+        {{ form.csrf_token }}
+        <center><h2> Register Information </h2></center>
+        {% if error %}
+            <center><h3 class="error"> {{ error }}</h3></center>
+        {% endif %}
+
+        <table id = "register">
+            <tr>
+                <td>{{ form.userid.label }}</td>
+                <td>{{ form.userid(size = 20) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.password.label }}</td>
+                <td>{{ form.password(size = 20) }}</td>
+            </tr>
+            <tr>
+                <td>{{ form.confirm.label }}</td>
+                <td>{{ form.confirm(size = 20) }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Submit" name="submit"><input type = "reset" value="Reset" name="reset"></td>
+            </tr>
+        </table>
+</form>
