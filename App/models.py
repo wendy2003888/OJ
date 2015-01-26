@@ -10,7 +10,7 @@ class User(db.Model):
     password = db.Column(db.String(100), index = True, unique = True)
     #role = db.Column(db.SmallInteger, default = ROLE_USER)
 
-    def __init__(self, userID, password):
+    def __init__(self, userid, password):
         self.userid = userid
         self.password = password
 
@@ -20,3 +20,6 @@ class User(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+    def dis(self):
+        print self.userid, self.password
+

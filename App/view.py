@@ -1,8 +1,8 @@
+from App import app, db
 from flask import url_for, render_template, request, redirect
-from App import app
-from forms import RegisterForm
-from models import User		
+from forms import RegisterForm	
 from config import Useriderr, Passworderr
+from models import User 
 
 
 
@@ -16,22 +16,15 @@ def Login():
 
 @app.route("/sign_up", methods = ['GET', 'POST'])
 def Sign_up():
-    form = RegisterForm()
-    if request.method == 'GET':
-        return render_template('sign_up.html',form=form)
-    else:
-        if not form.validate_userid():
-        	error = Useriderr
-        elif not form.validate_password():
-        	error = Passworderr
-       	elif not form.validate_eq():
-       		error = 'Passwords must match'
-       	else:
-       		error = None
-        if error:
-        	return render_template('sign_up.html', form = form, error = error)
-        else:
-        	user = User(form.userid.data, form.password.data)
-        	user.save()
-        	return redirect('/')
+  form = RegisterForm()
+  if request.method == 'POST' and form.validate() :
+    user = User(form.userid.data, form.password.data)
+    user.save()
+    return redirect('/')
+  elif request.method == 'GET':
+      return render_template('sign_up.html',form=form)
+  else:
+      return render_template('sign_up.html',form=form, error = 'Error')
+
+
 
