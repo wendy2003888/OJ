@@ -1,8 +1,9 @@
 from App import db
 from App.models import  User
+from App.config import ADMIN, ADMINKEY
 
 db.drop_all()
 db.create_all()
 
-# tmp = User('w111111', 'w111111')
-# tmp.save()
+tmp = User(ADMIN, ADMINKEY, True)
+tmp.save()
