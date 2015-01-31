@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<head>
+    <link href="../static/css/signupstyle.css" rel="stylesheet">
+    <center><h1> Modify Profile </h1></center>
+</head>
+<body>
+  <form action = {{ url_for('Modify',userid = user.userid) }}  method="POST" class="sign_up">
+        {{ form.csrf_token }}
+        <!-- {% if error %}
+            <center> <h3 class="error"> {{ error }} </h3> </center>
+        {% endif %} -->
+
+        <table id = "register">
+            <tr>
+                <td><label for= "Nickname" >Nick Name:</label></td>
+                <td>{{ form.nickname }}</td>
+            </tr>
+            <tr>
+              <td><label for="password">Password:</label></td>
+              <td>{{ form.password }}</td>
+            </tr>
+            <tr>
+              <td><label for="confirm">Repeat Password:</label></td>
+              <td>{{ form.confirm }}</td>
+            </tr>
+            <tr>
+              <td><label for="emial">E-mail:</label></td>
+              <td>{{ form.email }}</td>
+            </tr>
+        </table>
+        <button type="submit" >Save</button>
+  </form>
+</body>

@@ -11,3 +11,4 @@ db = SQLAlchemy(app)
 loginmng = LoginManager()
 
 loginmng.setup_app(app)
+#loginmng.login_view = '/login'

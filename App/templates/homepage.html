@@ -1,9 +1,8 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-"http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="../static/main.css" >
-		<link rel="stylesheet" href="../static/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="../static/css/main.css" >
+		<link rel="stylesheet" href="../static/css/bootstrap.css">
 		<link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
 		<style type="text/css">
 		p {
@@ -18,12 +17,20 @@
 	</head>
 
 	<body> 
-		<div class = "navigation">
-			<div class = "navbar nav-tabs">
-				<ul class = "pull-right">
+		<div class = "navbar">
+			{% if g.user.is_authenticated() %}
+				<ul class = "nav navbar-right">
+					<li> <a href = "#"> {{ g.user.userid }} </a> </li>
+					<li> <a href = {{ g.url }}> Profile </a> </li>
+					<li> <a href = "/logout"> Log out </a> </li>
+				</ul>
+			{% else %}
+				<ul class = "navbar-form navbar-right">
 					<li> <a href = "/login"> Login </a> </li>
 					<li> <a href = "/sign_up"> Sign up </a> </li> 
 				</ul>
+			{% endif %}
+			<div class = "nav nav-tabs">
 				<ul class = "bar">
 					<li> <i> <big> <a href = "/"> Homepage </a> </big> </i> </li>
 					<li> <i> <big> <a href = "#"> Promblems </a> </big> </i> </li>
@@ -32,7 +39,7 @@
 				</ul>
 			</div>
 		</div>
-		
+
 		<div class = jumbotron>
 			<div class = "Head">
 				<h1 align="center"> <bold> Hello </bold> </h1>
@@ -44,12 +51,7 @@
 					test.
 					</p>
 			</div>
-
-			<!--This is a comment -->
 		</div>
-		<div>
-			{% block content %}
-	    	{% endblock %}
-	    </div>
+		
 	</body>
 </html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href = "../static/css/signupstyle.css" rel = "stylesheet">
+		<center> <h1>Profile ------  {{ g.user.userid }}</h1> </center>
+	</head>
+	<body>
+		<div>
+		<center> <h2> <a href = "/"> Homepage </a> </h2> </center>
+			<table class = "sign_up">
+				<tr>
+					<td> User ID: </td>
+					<td> {{ g.user.userid }} </td> 
+				 </tr>
+				 <tr>
+					<td> NickName: </td>
+					<td> {{ g.user.nickname }}</td>
+				</tr>
+				<tr>
+					<td> E-mail: </td>
+					<td> {{ g.user.email }}</td>
+				</tr>
+				<tr>
+					<td> <button name = "Modify" onclick="javascript:location.href= ' {{g.url}}modify' ">Modify </button> </td>
+				</tr>
+			</table>
+		</div>
+	</body>
+</html>
+

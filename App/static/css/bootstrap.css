@@ -3522,6 +3522,7 @@ tbody.collapse.in {
   bottom: 100%;
   margin-bottom: 2px;
 }
+
 @media (min-width: 768px) {
   .navbar-right .dropdown-menu {
     right: 0;
@@ -4837,12 +4838,14 @@ a.badge:focus {
 .nav-pills > li > a > .badge {
   margin-left: 3px;
 }
-/*.jumbotron {
+.jumbotron {
+  color: inherit;
   padding: 30px 15px;
   margin-bottom: 30px;
-  color: inherit;
-  background-color: #eee;
-}*/
+  /*color: rgb(230, 230, 250);*/
+  background-color: rgb(210, 227, 235);
+  border: 20px solid rgb(245, 245, 245);
+}
 .jumbotron h1,
 .jumbotron .h1 {
   color: inherit;

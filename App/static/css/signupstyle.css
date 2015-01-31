@@ -1,0 +1,87 @@
+
+
+body {
+  line-height: 1;
+  font: 14px/20px 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: rgb(0, 0, 0);
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body, .login-submit, .login-submit:before, .login-submit:after {
+  /*background: rgb(224,255,255) url("../img/bg.png") 0 0 repeat;*/
+   background: rgb(209,217,228);
+}
+
+.sign_up
+{
+  position: relative;
+  margin: 80px auto;
+  width: 400px;
+  padding-right: 32px;
+  font-weight: bold;
+  color: rgba(0, 0，0, 0.6);
+}
+.sign_up p {
+  margin: 0 0 10px;
+}
+
+
+input, button, label {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: bold;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+input[type=text], input[type=password] {
+  padding: 0 10px;
+  width: 200px;
+  height: 30px;
+  color: black;
+  background: rgba(0, 0, 0, 0.16);
+  border: 0;
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 1px 4px rgba(46,59,78, 0.3), 0 1px rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 1px 4px rgba(46,59,78, 0.3), 0 1px rgba(255, 255, 255, 0.06);
+}
+input[type=text]:focus, input[type=password]:focus {
+  color: white;
+  background: rgb(89,115,152);
+  outline: 0;
+}
+
+
+label {
+  float: left;
+  /*width: 100px;*/
+  line-height: 40px;
+  padding-right: 30px;
+  font-weight: 200;
+  text-align: right;
+  letter-spacing: 1px;
+}
+
+
+::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
