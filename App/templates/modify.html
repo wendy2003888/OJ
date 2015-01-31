@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <head>
-    <link href="../static/css/signupstyle.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/Formstyle.css">
     <center><h1> Modify Profile </h1></center>
 </head>
 <body>
+  <div class = "nav">
+            <ul>
+                <li> <a href = "/"> Homepage </a> </li>
+                <li> <a href = "/promlems/"> Problems </a> </li>
+                <li> <a href = "#"> Status </a> </li> 
+                <li> <a href = "#"> F.A.Q </a> </li> 
+            </ul>
+    </div>
   <form action = {{ url_for('Modify',userid = user.userid) }}  method="POST" class="sign_up">
         {{ form.csrf_token }}
         <!-- {% if error %}

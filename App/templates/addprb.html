@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<center> <h1>Add problems </h1> </center>
+  		<link rel="stylesheet" href="../static/css/Formstyle.css">
+	</head>
+	<body>
+		<div class = "nav">
+			<ul>
+				<li> <a href = "/"> Homepage </a> </li>
+				<li> <a href = "/promlems/"> Problems </a> </li>
+				<li> <a href = "#"> Status </a> </li> 
+				<li> <a href = "#"> F.A.Q </a> </li> 
+			</ul>
+		</div>
+		{{ form.csrf_token }}
+		<form action = {{ url_for('Addprb')}} method = "POST" class = "form-tab">
+			<table id = "addprb">
+                <tr>
+                    <td><label for="title"> {{ form.title.label }} </label> </td>
+                    <td>{{ form.title }}</td>
+                </tr>
+                <tr>
+                    <td><label for="description "> {{ form.description .label }} </label> </td>
+                    <td>{{ form.description }}</td>
+                </tr>
+                <tr>
+                    <td><label for="pbinput"> {{ form.pbinput.label }} </label> </td>
+                    <td>{{ form.pbinput }}</td>
+                </tr>
+                <tr>
+                    <td><label for="pboutput"> {{ form.pboutput.label }} </label> </td>
+                    <td>{{ form.pboutput }}</td>
+                </tr>
+                <tr>
+                    <td><label for="pbinput"> {{ form.sinput.label }} </label> </td>
+                    <td>{{ form.sinput }}</td>
+                </tr>
+                <tr>
+                    <td><label for="pboutput"> {{ form.soutput.label }} </label> </td>
+                    <td>{{ form.soutput }}</td>
+                </tr>
+                <tr>
+                    <td><label for="hint"> {{ form.hint.label }} </label> </td>
+                    <td>{{ form.hint }}</td>
+                </tr>
+            </table>
+            <tr>
+                    <button type="submit" >Submit</button>
+                </tr>
+	    </form>
+	</body>
+</html>

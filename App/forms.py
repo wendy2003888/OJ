@@ -5,7 +5,9 @@ import re
 
 
 class RegisterForm(Form):
-    userid= TextField('user ID', [validators.Length(min = 3, max = 20)] )
+    userid= TextField('user ID', [
+    	validators.Length(min = 3, max = 20)
+    	])
     password = PasswordField('PassWord', [
     	validators.Length(min = 6, max = 20)
     	])
@@ -19,8 +21,12 @@ class LoginForm(Form):
 
 
 class EditForm(Form):
-	nickname = TextField('NickName', [validators.Length(min = 3, max = 20)] )
-	userid= TextField('user ID', [validators.Length(min = 3, max = 20)] )
+	nickname = TextField('NickName', [
+		validators.Length(min = 3, max = 20)
+		])
+	userid= TextField('user ID', [
+		validators.Length(min = 3, max = 20)
+		])
 	password = PasswordField('PassWord', [
     	validators.Length(min = 6, max = 20)
     	])
@@ -30,3 +36,18 @@ class EditForm(Form):
 	email = TextField('E-mail', [
     	validators.Length(min = 6, max = 50)
     	])
+
+class Problem(Form):
+	title = TextField('Title', [
+		validators.InputRequired(message = 'Title must not be None.')
+		])
+	description = TextField('Description')
+	pbinput = TextField('Input', [
+		validators.InputRequired()
+		])
+	pboutput = TextField('Output', [
+		validators.InputRequired()
+		])
+	sinput = TextField('Sample Input')
+	soutput = TextField('Sample Output')
+	hint = TextField('Hint')

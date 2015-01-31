@@ -1,7 +1,7 @@
 from App import app, loginmng, db
 from flask import url_for, render_template, request, redirect, g
 from flask.ext.login import login_user,login_required, current_user, logout_user
-from forms import RegisterForm, LoginForm, EditForm
+from forms import RegisterForm, LoginForm, EditForm, Problem
 from config import Useriderr, Passworderr, UserWrong, UserConflict, PasswordWrong
 from models import User 
 
@@ -50,6 +50,17 @@ def Admin():
 @app.route('/problems/')
 def Problems():
   return render_template('problems.html')
+
+@app.route('/addprb', methods = ['GET', 'POST'])
+def Addprb():
+  form = Problem()
+  if request.method == 'GET':
+    return render_template('addprb.html', form = form)
+  if request.method == 'POST' and form.validate_on_submit():
+    return redirect(url_for('Problems'))
+  return redirect('/')
+
+
 
 @app.route('/login', methods = ['GET', 'POST'])
 def Login():
