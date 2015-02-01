@@ -51,6 +51,9 @@ class Problem(db.Model):
     sinput = db.Column(db.String(9999))
     soutput = db.Column(db.String(9999))
     hint = db.Column(db.String(9999))
+    ratio = db.Column(db.Float, default = 0.0)
+    accnt = db.Column(db.Integer, default = 0)
+    submitcnt = db.Column(db.Integer, default = 0)
 
     def __init__(self, title, description, pbinput, pboutput, sinput, soutput, hint):
         self.title = title
@@ -60,3 +63,7 @@ class Problem(db.Model):
         self.sinput = sinput
         self.soutput = soutput
         self.hint = hint
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()

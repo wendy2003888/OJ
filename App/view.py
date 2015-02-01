@@ -1,9 +1,9 @@
 from App import app, loginmng, db
 from flask import url_for, render_template, request, redirect, g
 from flask.ext.login import login_user,login_required, current_user, logout_user
-from forms import RegisterForm, LoginForm, EditForm, Problem
+from forms import RegisterForm, LoginForm, EditForm, ProblemForm
 from config import Useriderr, Passworderr, UserWrong, UserConflict, PasswordWrong
-from models import User 
+from models import User, Problem
 
 @loginmng.user_loader
 def load_user(userid):
@@ -14,6 +14,15 @@ def before_request():
   g.user = current_user
   if g.user.is_authenticated():
     g.url = url_for('Profile', userid = g.user.userid)
+
+def get_error(form):
+  error = None
+  for field in form:
+    if field.errors:
+      error = field.errors[0]
+      break
+  return error
+
 
 @app.route('/')
 def Homepage():
@@ -49,16 +58,24 @@ def Admin():
 
 @app.route('/problems/')
 def Problems():
-  return render_template('problems.html')
+  problemlist = Problem.query.all()
+  for p in problemlist:
+    print p.title
+  return render_template('problems.html', problemlist = problemlist)
 
 @app.route('/addprb', methods = ['GET', 'POST'])
 def Addprb():
-  form = Problem()
+  form = ProblemForm()
   if request.method == 'GET':
     return render_template('addprb.html', form = form)
-  if request.method == 'POST' and form.validate_on_submit():
+  if request.method == 'POST' and form.validate():
+    problem = Problem(form.title.data, form.description.data, 
+      form.pbinput.data, form.pboutput.data, 
+      form.sinput.data, form.soutput.data, form.hint.data)
+    problem.save()
     return redirect(url_for('Problems'))
-  return redirect('/')
+  error = get_error(form)
+  return render_template('addprb.html', form = form, error = error)
 
 
 
@@ -98,7 +115,8 @@ def Sign_up():
   elif request.method == 'GET':
       return render_template('sign_up.html',form=form)
   else:
-      return render_template('sign_up.html',form=form, error = 'Error')
+      error = get_error(form)
+      return render_template('sign_up.html',form=form, error = error)
 
 
 

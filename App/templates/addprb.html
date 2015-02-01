@@ -13,10 +13,13 @@
 				<li> <a href = "#"> F.A.Q </a> </li> 
 			</ul>
 		</div>
-		{{ form.csrf_token }}
 		<form action = {{ url_for('Addprb')}} method = "POST" class = "form-tab">
+			{{ form.csrf_token }}
+            {% if error %}
+                <center> <h3 class="error"> {{ error }} </h3> </center>
+            {% endif %}
 			<table id = "addprb">
-                <tr>
+                <tr class = "title">
                     <td><label for="title"> {{ form.title.label }} </label> </td>
                     <td>{{ form.title }}</td>
                 </tr>
