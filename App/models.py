@@ -68,3 +68,26 @@ class Problem(db.Model):
         db.session.add(self)
         db.session.commit()
 
+
+class Submit(db.Model):
+    runid = db.Column(db.Integer, primary_key = True, unique = True)
+    userid = db.Column(db.String(20))
+    pbid = db.Column(db.Integer)
+    result = db.Column(db.String(20), default = 'Pending')
+    memory = db.Column(db.Integer, default = None)
+    jgtime = db.Column(db.Integer, default = None)
+    language = db.Column(db.String(20))
+    codelen = db.Column(db.Integer, default = None)
+    time = db.Column(db.String(20))
+
+    def __init__(self, runid, userid, pbid, language, time):
+        self.runid = runid
+        self.userid = userid
+        self.pbid = pbid
+        self.language = language
+        self.time = time
+
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()

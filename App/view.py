@@ -3,7 +3,8 @@ from flask import url_for, render_template, request, redirect, g
 from flask.ext.login import login_user,login_required, current_user, logout_user
 from forms import RegisterForm, LoginForm, EditForm, ProblemForm, SubmitForm
 from config import Useriderr, Passworderr, UserWrong, UserConflict, PasswordWrong
-from models import User, Problem
+from models import User, Problem, Submit
+import time
 
 @loginmng.user_loader
 def load_user(userid):
@@ -23,6 +24,8 @@ def get_error(form):
       break
   return error
 
+def get_time():
+  return  time.strftime('%y-%m-%d %H:%M:%S')
 
 @app.route('/')
 def Homepage():
@@ -70,14 +73,20 @@ def Showprb(problemid):
   return render_template('prbbase.html', problem = problem)
 
 @app.route('/submit/<problemid>', methods=['GET','POST'])
-def Submit(problemid):
+def Submits(problemid):
   form = SubmitForm()
   problem = Problem.query.get(problemid)
   if request.method == 'POST' and form.validate():
-    print form.code.data
-    return redirect('/')
+    submit = Submit(Submit.query.count() + 1 , g.user.userid, form.pbid.data, form.language.data, get_time() )
+    submit.save()
+    return redirect(url_for('Status'))
   error = get_error(form)
   return render_template('submit.html', form = form, problem = problem, error = error)
+
+@app.route('/status/')
+def Status():
+  submit_list = Submit.query.order_by(Submit.runid.desc())
+  return render_template('status.html', submit_list = submit_list )
 
 @app.route('/addprb', methods = ['GET', 'POST'])
 def Addprb():
