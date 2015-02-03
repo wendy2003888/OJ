@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="../static/css/main.css" >
+		<link rel="stylesheet" href="../static/css/bootstrap.css">
+	</head>
+	<body>
+		<div class="container">
+			<div class = "nav">
+	            <ul class = "nav nav-tabs">
+	                <li> <a href = "/"> Homepage </a> </li>
+	                <li> <a href = "/problems/"> Problems </a> </li>
+	                <li> <a href = "#"> Status </a> </li> 
+	                <li> <a href = "#"> F.A.Q </a> </li> 
+	            </ul>
+	    	</div>
+	    	<center> <h1> Submit your solution </h1> </center>
+	    	<form action={{ url_for('Submit', problemid = problem.id) }} method="POST">
+        	{{ form.csrf_token }}
+	    	<center>
+	    		{% if error %}
+                	<center> <h3 class="error"> {{ error }} </h3> </center>
+           		{% endif %}
+	    		<table>
+	    		<tr>
+	    			<td><label>Problem ID:</label></td>
+	    			<td>{{ form.pbid }}</td>
+	    		</tr>
+	    		</table>
+	    		<label>Language:</label>
+				{{ form.language }}
+				
+				<br/>
+				<label>Source Code:</label>
+				<br/>
+				<textarea class="form-group-lg" rows="15"  value = {{ form.code }} </textarea>
+				<br/>
+				<button type="submit" class="btn btn-default" >Submit</button>
+            	<button type="reset" class="btn btn-default">Reset</button>
+			</center>
+
+  		</div>
+	</body>
+</html>

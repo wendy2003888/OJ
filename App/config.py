@@ -19,3 +19,4 @@ UserWrong = 'UserID dose not exist.'
 PasswordWrong = 'Password is incorrect.'
 
 
+Titleerr = 'Title can'

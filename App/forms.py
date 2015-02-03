@@ -1,5 +1,5 @@
 from flask_wtf import Form 
-from wtforms import TextField, BooleanField, PasswordField, validators
+from wtforms import TextField, BooleanField, PasswordField, SelectField, validators
 #from wtforms.validators import DataRequired, Length, EqualTo
 import re
 
@@ -58,4 +58,14 @@ class ProblemForm(Form):
 		])
 	hint = TextField('Hint',[
 		validators.length(max = 9999, message = 'The max length of Hint should not over 10000,')
+		])
+
+
+class SubmitForm(Form):
+	pbid = TextField('ProblemID', [
+		validators.InputRequired(message = 'Problem, ID must not be None.')
+		])
+	language = SelectField('Language',choices = [('G++','G++'),('C++','C++'),('Python2.7','Python2.7')])
+	code = TextField('Source Code',[
+		validators.DataRequired( message = 'Source Code must not be None.')
 		])

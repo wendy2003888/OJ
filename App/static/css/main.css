@@ -1,16 +1,20 @@
-.navbar li{
-	display: inline;
-}
 
-.navbar{
+.nav{
 	font-weight: bold;
-	right: 30px;
 }
 
-.bar{
-	border-top: 20px;
-	margin-top: 100px;
+.nav-tabs
+{
+	font-size: 20px;
 }
+.main{
+	font-weight: bold;
+	font-size: 20px;
+	right: 30px;
+	margin-top: 50px;
+}
+
+
 
 /*.jumbotron {
   padding: 30px 15px;
@@ -25,4 +29,61 @@
 	margin-top: auto;
 	margin-left: auto;
 	padding: 5px;
+}
+
+textarea .xs {
+
+}
+
+#profile
+{
+	background-color: rgb(229,222,237);
+}
+
+#problem{
+	font-size: 15px;
+	background-color: rgb(248,248,250);
+}
+#problem .container
+{
+	height: auto;
+	margin-top: 20px;
+}
+
+#problem h1{
+	color: rgb(97,48,255);
+}
+
+#problem dl{
+	/*background-color: rgba(226,252,255,0.7);*/
+	background-color:rgba(226,229,255,0.6);
+	padding: 10px 20px;
+	border-radius: 5px;
+	border:3px solid;
+	border-width: 1px;
+	/*border-color: rgb(49,234,255);*/
+	border-color: rgb(136,99,255);
+	box-shadow: 1px 2px 4px rgba(46,59,78, 0.3), 0 2px rgba(255,255,255, 0.06);
+	text-align: left;
+}
+
+#problem dt{
+	color:rgb(150,160,255);
+}
+
+/*#problem dd{
+	background-color: rgba(226,252,255,0.7);
+	background-color:rgba(226,229,255,0.6);
+	padding: 10px 20px;
+	border-radius: 5px;
+	border:3px solid;
+	border-width: 1px;
+	border-color: rgb(49,234,255);
+	border-color: rgb(136,99,255);
+	box-shadow: 1px 2px 4px rgba(46,59,78, 0.3), 0 2px rgba(255,255,255, 0.06);
+	text-align: left;
+}*/
+
+#problem p {
+  	margin: 0 0 10px;
 }

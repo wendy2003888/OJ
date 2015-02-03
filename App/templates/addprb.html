@@ -21,36 +21,37 @@
 			<table id = "addprb">
                 <tr class = "title">
                     <td><label for="title"> {{ form.title.label }} </label> </td>
-                    <td>{{ form.title }}</td>
+                    <td><textarea class="form-control" rows="1" value＝{{ form.title }} </textarea> </td>
                 </tr>
                 <tr>
-                    <td><label for="description "> {{ form.description .label }} </label> </td>
-                    <td>{{ form.description }}</td>
+
+                    <td><label for="description "> {{ form.description.label }} </label> </td>
+                    <td><textarea class="form-control" rows="4" value = {{ form.description }}  </textarea> </td>
                 </tr>
                 <tr>
                     <td><label for="pbinput"> {{ form.pbinput.label }} </label> </td>
-                    <td>{{ form.pbinput }}</td>
+                    <td><textarea class="form-control" rows="3" value = {{ form.pbinput }} </textarea> </td>
                 </tr>
                 <tr>
                     <td><label for="pboutput"> {{ form.pboutput.label }} </label> </td>
-                    <td>{{ form.pboutput }}</td>
+                    <td><textarea class="form-control" rows="3" value = {{ form.pboutput }}  </textarea> </td>
                 </tr>
                 <tr>
                     <td><label for="pbinput"> {{ form.sinput.label }} </label> </td>
-                    <td>{{ form.sinput }}</td>
+                    <td><textarea class="form-control" rows="3" value = {{ form.sinput }} </textarea> </td>
                 </tr>
                 <tr>
                     <td><label for="pboutput"> {{ form.soutput.label }} </label> </td>
-                    <td>{{ form.soutput }}</td>
+                     <td><textarea class="form-control" rows="3" value = {{ form.soutput }}  </textarea> </td>
                 </tr>
                 <tr>
                     <td><label for="hint"> {{ form.hint.label }} </label> </td>
-                    <td>{{ form.hint }}</td>
+                    <td><textarea class="form-control" rows="3" value = {{ form.hint }}  </textarea></td>
                 </tr>
             </table>
             <tr>
                     <button type="submit" >Submit</button>
-                </tr>
+            </tr>
 	    </form>
 	</body>
 </html>

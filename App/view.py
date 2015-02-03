@@ -1,7 +1,7 @@
 from App import app, loginmng, db
 from flask import url_for, render_template, request, redirect, g
 from flask.ext.login import login_user,login_required, current_user, logout_user
-from forms import RegisterForm, LoginForm, EditForm, ProblemForm
+from forms import RegisterForm, LoginForm, EditForm, ProblemForm, SubmitForm
 from config import Useriderr, Passworderr, UserWrong, UserConflict, PasswordWrong
 from models import User, Problem
 
@@ -59,9 +59,25 @@ def Admin():
 @app.route('/problems/')
 def Problems():
   problemlist = Problem.query.all()
-  for p in problemlist:
-    print p.title
+  # for p in problemlist:
+  #   print p.title
   return render_template('problems.html', problemlist = problemlist)
+
+@app.route('/problems/<problemid>')
+def Showprb(problemid):
+  problem = Problem.query.get(problemid)
+  #print problem
+  return render_template('prbbase.html', problem = problem)
+
+@app.route('/submit/<problemid>', methods=['GET','POST'])
+def Submit(problemid):
+  form = SubmitForm()
+  problem = Problem.query.get(problemid)
+  if request.method == 'POST' and form.validate():
+    print form.code.data
+    return redirect('/')
+  error = get_error(form)
+  return render_template('submit.html', form = form, problem = problem, error = error)
 
 @app.route('/addprb', methods = ['GET', 'POST'])
 def Addprb():
