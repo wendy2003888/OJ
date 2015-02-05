@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	 	<link href = "../static/css/main.css" rel = "stylesheet">
+	 	<link rel="stylesheet" href="../static/css/bootstrap.css">
+	</head>
+	<body>
+		<center> <h1> F.A.Q </h1> </center>
+		<div class="container">
+		 	<div class="collapse navbar-collapse" >
+			 	{% if g.user.is_authenticated() %}
+					 <ul class="nav navbar-nav navbar-right">
+						<li> <a href = {{ g.url }}> {{ g.user.userid }} </a> </li>
+						<li> <a href = "/logout"> Log out </a> </li>
+					</ul>
+				{% else %}
+					<ul class = "nav navbar-nav navbar-right">
+						<li> <a href = "/login"> Login </a> </li>
+						<li> <a href = "/sign_up"> Sign up </a> </li> 
+					</ul>
+				{% endif %}
+				<ul class = "nav nav-tabs">
+					<ul class = "nav nav-tabs">
+	                <li> <a href = "/"> Homepage </a> </li>
+	                <li> <a href = "/problems/"> Problems </a> </li>
+	                <li> <a href = "/status/"> Status </a> </li> 
+	                <li> <a href = "/FAQ/"> F.A.Q </a> </li>
+	            </ul>
+			</div>
+			<div class = "jumbotron" id = "jumbotron">
+				<p>
+	            Q: What is the compiler the judge is using and what are the compiler options?
+	            <br/>
+	            A: The online judge system is running on <a href="#">Max OS</a>. 
+	            We are using <a href="http://gcc.gnu.org/">GNU GCC/G++</a> for C/C++ compile, <a href="http://www.python.org">Python2.7</a> for python compile.
+	            <br/>
+	            <ul>
+			        <li> Compiler options</li>
+			        <table border="1" style="font-family: Arial, Helvetica, monospace;">
+			            <tr>
+			                <td> C: </td>
+			                <td class="blue"> gcc main.c -o main -Wall -lm -O2 -std=c99 --static -DONLINE_JUDGE </td>
+			            </tr>
+			            <tr>
+			                <td> C++: </td>
+			                <td class="blue">g++ main.cpp -o main -O2 -Wall -lm --static -DONLINE_JUDGE </td>
+			            </tr>
+			            <tr>
+			                <td> Python2.7: </td>
+			                <td class="blue"> python2.7 -m py_compile main.py </td>
+			            </tr>
+			        </table>
+			    </ul>
+			    <p>
+	            Q: Where is the input and the output?
+	            <br/>
+	            A: Your program shall read input from stdin('Standard Input') and write output to stdout('Standard Output').For example,you can use 'scanf' in C or 'cin' in C++ to read from stdin,and use 'printf' in C or 'cout' in C++ to write to stdout.
+	            <br/>
+            	User programs are not allowed to open and read from/write to files, you will get a "<font color='green'>Runtime Error</font>" if you try to do so.
+            	<br/>
+            	 Here is a sample solution for problem 1000 using C++:
+            	<br/>
+            	</p>
+	            <pre>
+	                #include &lt;iostream&gt;
+	                using namespace std;
+	                int main(){
+	                    int a,b;
+	                    while(cin >> a >> b)
+	                        cout << a+b << endl;
+	                    return 0;
+	                }
+	            </pre>
+	            <p>Here is a sample solution for problem 1000 using C:
+	            <br/>
+	            <pre>
+	            #include &lt;stdio.h&gt;
+	            int main(){
+	                int a,b;
+	                while(scanf("%d %d",&amp;a, &amp;b) != EOF)
+	                    printf("%d\n",a+b);
+	                return 0;
+	            }
+	            </pre>
+	            </p>
+	            <p>Here is a sample solution for problem 1000 using Python:
+	            <br/>
+	            <pre>
+	                a,b = map(int,raw_input().split())
+	                print a + b
+	            </pre>
+	            </p>
+	            <p>
+	            Q: Why did I get a Compile Error? It's well done!
+	            <br/>
+	            A: There are some differences between GNU and MS-VC++, such as:
+	            <br/>
+	            <ul>
+	                <li>
+	                    <font color='blue'>main</font> must be declared as <font color='blue'>int</font>, <font color='blue'>void main</font> will end up with a Compile Error.
+	                </li>
+	                <li>
+	                    <font color='green'>i</font> is out of definition after block "<font color='blue'>for</font>(<font color='blue'>int</font> <font color='green'>i</font>=0...){...}"
+	                </li>
+	                <li>
+	                    <font color='green'>itoa</font> is not an ANSI function.
+	                </li>
+	                <li>
+	                    <font color='green'>__int64</font> of VC is not ANSI, but you can use <font color='blue'>long long</font> for 64-bit integer.<br/>
+	                    try use #define __int64 long long when submit codes from MSVC6.0
+	                </li>
+            	</ul>
+        		</p>
+        		<p>
+	            Q: What is the meaning of the judge's reply XXXXX?
+	            <br/>
+	            A: Here is a list of the judge's replies and their meaning:
+	            <br/>
+	            <h4>
+	            <small>
+        		<font color='blue'>Pending</font> : The judge is so busy that it can't judge your submit at the moment, usually you just need to wait a minute and your submit will be judged.
+        		<br/>
+	            <font color='blue'>Pending Rejudge</font>: The test datas has been updated, and the submit will be judged again and all of these submission was waiting for the Rejudge.
+	            <br/>
+	            <font color='blue'>Compiling</font> : The judge is compiling your source code.
+	            <br/>
+	            <font color="blue">Running &amp; Judging</font>: Your code is running and being judging by our Online Judge.
+	            <br/>
+	            <font color='blue'>Accepted</font> : OK! Your program is correct!.
+	            <br/>
+	            <font color='blue'>Presentation Error</font> : Your output format is not exactly the same as the judge's output, although your answer to the problem is correct. Check your output for spaces, blank lines,etc against the problem output specification.
+	            <br/>
+	            <font color='blue'>Wrong Answer</font> : Correct solution not reached for the inputs. The inputs and outputs that we use to test the programs are not public (it is recomendable to get accustomed to a true contest dynamic ;-).
+	            <br/>
+	            <font color='blue'>Time Limit Exceeded</font> : Your program tried to run during too much time.
+	            <br/>
+	            <font color='blue'>Memory Limit Exceeded</font> : Your program tried to use more memory than the judge default settings.
+	            <br/>
+	            <font color='blue'>Output Limit Exceeded</font>: Your program tried to write too much information. This usually occurs if it goes into a infinite loop. Currently the output limit is 1M bytes.
+	            <br/>
+	            <font color='blue'>Runtime Error</font> : All the other Error on the running phrase will get Runtime Error, such as 'segmentation fault','floating point exception','used forbidden functions', 'tried to access forbidden memories' and so on.
+	            <br/>
+	            <font color='blue'>Compile Error</font> : The compiler (gcc/g++/gpc) could not compile your ANSI program. Of course, warning messages are not error messages. Click the link at the judge reply to see the actual error message.
+            	<br/>
+            	</small>
+            	</h4>
+        		</p>
+	            <p>
+	            Q: How to attend Online Contests?
+	            <br/>
+	            A: Can you submit programs for any practice problems on this Online Judge? If you can, then that is the account you use in an online contest.
+	            <br/>
+        		If you can't, then please <a href={{ url_for('Sign_up') }}>Sign up</a> an UserID with password first.<br/><br/>
+            	<br/>
+        		</p>
+			</div>
+
+		</div>
+	</body>
+</html>

@@ -8,45 +8,52 @@
 		<div class = "container">
 			<div class="collapse navbar-collapse" >
 			{% if g.user.is_authenticated() %}
-				 <ul class="nav navbar-nav navbar-right">
-					<li> <a href = {{ g.url }}> {{ g.user.userid }} </a> </li>
+
+				<ul class="nav navbar-nav navbar-right">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                    {{ g.user.userid }}
+                    </button>
+				  <ul class="dropdown-menu" role="menu">
+				    <li role="presentation"> <a role="menuitem" tabindex="-1" href = {{ g.url }}> Profile </a> </li>
+				    <li class="divider"></li>
+				    <li role="presentation"><a role="menuitem" tabindex="-1" href="/manage/">Management</a></li>
+				  </ul>
 					<li> <a href = "/logout"> Log out </a> </li>
-				</ul>
-			{% else %}
-				<ul class = "nav navbar-nav navbar-right">
-					<li> <a href = "/login"> Login </a> </li>
-					<li> <a href = "/sign_up"> Sign up </a> </li> 
 				</ul>
 			{% endif %}
 		
-			<div class = "main">
-	            <ul class = "nav nav-tabs">
-	                <li> <a href = "/"> Homepage </a> </li>
-	                <li> <a href = "/problems/"> Problems </a> </li>
-	                <li> <a href = "#"> Status </a> </li> 
-	                <li> <a href = "#"> F.A.Q </a> </li> 
-	            </ul>
-			</div>
+				<div class = "main">
+		            <ul class = "nav nav-tabs">
+		                <li> <a href = "/"> Homepage </a> </li>
+		                <li> <a href = "/problems/"> Problems </a> </li>
+		                <li> <a href = "/status/"> Status </a> </li> 
+		                <li> <a href = "/FAQ/"> F.A.Q </a> </li>
+		            </ul>
+				</div>
 			<center> <h1>Profile ------  {{ g.user.userid }}</h1> </center>
-		</div>
-	    	<div id = "profile">
-				<table>
-					<tr>
-						<td> User ID: </td>
-						<td> {{ g.user.userid }} </td> 
-					 </tr>
-					 <tr>
-						<td> NickName: </td>
-						<td> {{ g.user.nickname }}</td>
-					</tr>
-					<tr>
-						<td> E-mail: </td>
-						<td> {{ g.user.email }}</td>
-					</tr>
-					<tr>
-						<td> <button name = "Modify" onclick="javascript:location.href= ' {{g.url}}modify' ">Modify </button> </td>
-					</tr>
-				</table>
+			</div>
+  					
+	    	<div class = "center" id = "profile">
+	    		<center>
+					<p class = "center">
+						User ID:
+						{{ g.user.userid }}
+						 <br/>
+						NickName:
+						{{ g.user.nickname }}
+						<br/>
+						E-mail:
+						{{ g.user.email }}
+						<br/>
+						<a href="{{g.url}}modify" class="btn btn-default" role="button" >Modify </a>
+						<br/>
+						{% if g.user.is_admin() %}
+							<div class="btn-group" role="group" id = "submit">
+								<a href= {{ url_for('Manage')}} class="btn btn-default" role="button"> Manage</a>
+							</div>
+						{% endif %}
+					</p>
+				</center>
 			</div>
 		</div>
 	</body>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href = "../static/css/main.css" rel = "stylesheet">
+		<link rel="stylesheet" href="../static/css/bootstrap.css">
+		
+	</head>
+	<body>
+		<div class="container" >
+			<center><h1> Online system </h1> </center>
+			<div class = "nav" id="problem">
+	            <ul class = "nav nav-tabs">
+	                <li> <a href = "/"> Homepage </a> </li>
+	                <li> <a href = "/problems/"> Problems </a> </li>
+	                <li> <a href = "#"> Status </a> </li> 
+	                <li> <a href = "#"> F.A.Q </a> </li> 
+	            </ul>
+	    	</div>
+	    </div>
+	    <div id = "jumbotron">
+		    <form action = {{ url_for('Editprb',problemid = pb.id) }}  method="POST" class="sign_up">
+	        {{ form.csrf_token }}
+	        <center>
+	        <h3>Edit Problem---- {{ pb.id }}</h3>
+	        <table class = "center" id = "addprb">
+	                <tr class = "title">
+	                    <td><label for="title"> {{ form.title.label }} </label> </td>
+	                    <td><textarea class="form-control" rows="1" value＝{{ form.title }}{{ pb.title }}</textarea> </td>
+	                </tr>
+	                <tr>
+
+	                    <td><label for="description "> {{ form.description.label }} </label> </td>
+	                    <td><textarea class="form-control" rows="4" value = {{ form.description }}{{ pb.description }}</textarea> </td>
+	                </tr>
+	                <tr>
+	                    <td><label for="pbinput"> {{ form.pbinput.label }} </label> </td>
+	                    <td><textarea class="form-control" rows="3" value = {{ form.pbinput }}{{ pb.pbinput }} </textarea> </td>
+	                </tr>
+	                <tr>
+	                    <td><label for="pboutput"> {{ form.pboutput.label }} </label> </td>
+	                    <td><textarea class="form-control" rows="3" value = {{ form.pboutput }}{{ pb.pboutput }} </textarea> </td>
+	                </tr>
+	                <tr>
+	                    <td><label for="pbinput"> {{ form.sinput.label }} </label> </td>
+	                    <td><textarea class="form-control" rows="3" value = {{ form.sinput }}{{ pb.sinput }}</textarea> </td>
+	                </tr>
+	                <tr>
+	                    <td><label for="pboutput"> {{ form.soutput.label }} </label> </td>
+	                     <td><textarea class="form-control" rows="3" value = {{ form.soutput }}{{ pb.soutput }}  </textarea> </td>
+	                </tr>
+	                <tr>
+	                    <td><label for="hint"> {{ form.hint.label }} </label> </td>
+	                    <td><textarea class="form-control" rows="3" value = {{ form.hint }}{{pb.hint }}  </textarea></td>
+	                </tr>
+	            </table>
+	        <button type="submit" >Save</button>
+	        </center>
+	        </form>
+        </div>
+	</body>
+</html>

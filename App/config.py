@@ -3,7 +3,11 @@ import os.path
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'test.db')
+SQLALCHEMY_POOL_RECYCLE = 5
+# SQLALCHEMY_POOL_TIMEOUT = 10
 
+
+ITEMS_ON_PAGE = 50
 ADMIN = 'admin'
 ADMINKEY = 123456
 
@@ -18,5 +22,4 @@ Passworderr = 'Password invalid. It can only contain NUMBERs & LETTERs, and leng
 UserWrong = 'UserID dose not exist.'
 PasswordWrong = 'Password is incorrect.'
 
-
-Titleerr = 'Title can'
+Permissionerr = 'You are not authorized! Only admin are permitted.'

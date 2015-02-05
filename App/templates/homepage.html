@@ -33,14 +33,14 @@
 			<div class = "main">
 	            <ul class = "nav nav-tabs">
 	                <li> <a href = "/"> Homepage </a> </li>
-	                <li> <a href = "/problems/"> Problems </a> </li>
-	                <li> <a href = "#"> Status </a> </li> 
-	                <li> <a href = "#"> F.A.Q </a> </li> 
+	                <li> <a href = {{ url_for("Problems", page = 1)}}> Problems </a> </li>
+	                <li> <a href = {{ url_for("Status", page = 1)}}> Status </a> </li> 
+	                <li> <a href = "/FAQ/"> F.A.Q </a> </li> 
 	            </ul>
 			</div>
 		</div>
 
-		<div class = jumbotron>
+		<div class = "jumbotron" id = "jumbotron">
 			<div class = "Head">
 				<h1 align="center"> <bold> Hello </bold> </h1>
 				<hr/>

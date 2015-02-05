@@ -4,7 +4,7 @@ class User(db.Model):
     id = db.Column(db.Integer)
     userid = db.Column(db.String(20), primary_key = True, unique = True)
     nickname = db.Column(db.String(20))
-    password = db.Column(db.String(20), index = True, unique = True)
+    password = db.Column(db.String(20), index = True)
     role = db.Column(db.Boolean)
     email = db.Column(db.String(100), unique = True)
 
@@ -19,6 +19,7 @@ class User(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+        # db.session.close()
 
     def is_authenticated(self):
         return True
@@ -67,12 +68,14 @@ class Problem(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+        db.session.close()
 
 
 class Submit(db.Model):
     runid = db.Column(db.Integer, primary_key = True, unique = True)
     userid = db.Column(db.String(20))
     pbid = db.Column(db.Integer)
+    code = db.Column(db.Text)
     result = db.Column(db.String(20), default = 'Pending')
     memory = db.Column(db.Integer, default = None)
     jgtime = db.Column(db.Integer, default = None)
@@ -80,10 +83,11 @@ class Submit(db.Model):
     codelen = db.Column(db.Integer, default = None)
     time = db.Column(db.String(20))
 
-    def __init__(self, runid, userid, pbid, language, time):
+    def __init__(self, runid, userid, pbid, code, language, time):
         self.runid = runid
         self.userid = userid
         self.pbid = pbid
+        self.code = code
         self.language = language
         self.time = time
 
@@ -91,3 +95,4 @@ class Submit(db.Model):
     def save(self):
         db.session.add(self)
         db.session.commit()
+        db.session.close()

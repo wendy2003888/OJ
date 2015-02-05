@@ -6,37 +6,39 @@
 		
 	</head>
 	<body id="problem">
-		<div class="container">
-		<center><h1> {{ problem.title }} </h1> </center>
-		<div class = "nav" id="problem">
-            <ul class = "nav nav-tabs">
-                <li> <a href = "/"> Homepage </a> </li>
-                <li> <a href = "/problems/"> Problems </a> </li>
-                <li> <a href = "#"> Status </a> </li> 
-                <li> <a href = "#"> F.A.Q </a> </li> 
-            </ul>
-    	</div>
-		<div class="container" id="problem">
-			    <dl id = "problem">
-				  <dt> Description </dt>
-				  <dd> {{ problem.description }} </dd>
-				  <dt> Input </dt>
-				  <dd> {{ problem.pbinput }} </dd>
-				  <dt> Output </dt>
-				  <dd> {{ problem.pboutput }} </dd>
-				  <dt> Sample Input </dt>
-				  <dd> {{ problem.sinput }} </dd>
-				  <dt> Sample Output </dt>
-				  <dd> {{ problem.soutput }} </dd>
-				  <dt> Hint </dt>
-				  <dd> {{ problem.hint }} </dd>
-				</dl>
-		</div>
-			<center><div class="btn-group" role="group" id = "submit">
-				<a href= {{ url_for('Submits', problemid = problem.id) }} class="btn btn-default" role="button"> Submit </a>
-				<a href= "#"class="btn btn-default" role="button"> Statistic </a>
-				<a href= "#"class="btn btn-default" role="button"> Discuss </a>
-			</div></center>
+		<div class="container" >
+			<center><h1> {{ problem.title }} </h1> </center>
+			<div class = "nav" id="problem">
+	            <ul class = "nav nav-tabs">
+	                <li> <a href = "/"> Homepage </a> </li>
+	                <li> <a href = "/problems/"> Problems </a> </li>
+	                <li> <a href = "#"> Status </a> </li> 
+	                <li> <a href = "#"> F.A.Q </a> </li> 
+	            </ul>
+	    	</div>
+			<div id="jumbotron">
+				    <dl id = "problem">
+					  <dt> Description </dt>
+					  <dd> {{ problem.description }} </dd>
+					  <dt> Input </dt>
+					  <dd> {{ problem.pbinput }} </dd>
+					  <dt> Output </dt>
+					  <dd> {{ problem.pboutput }} </dd>
+					  <dt> Sample Input </dt>
+					  <dd> {{ problem.sinput }} </dd>
+					  <dt> Sample Output </dt>
+					  <dd> {{ problem.soutput }} </dd>
+					  <dt> Hint </dt>
+					  <dd> {{ problem.hint }} </dd>
+					</dl>
+			</div>
+			<center>
+				<div class="btn-group" role="group" id = "submit">
+					<a href= {{ url_for('Submits', problemid = problem.id) }} class="btn btn-default" role="button"> Submit </a>
+					<a href= "/status/"class="btn btn-default" role="button"> Statistic </a>
+					<a href= "#"class="btn btn-default" role="button"> Discuss </a>
+				</div>
+			</center>
 		</div>
 	</body>
 </html>

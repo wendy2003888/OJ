@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href = "../static/css/main.css" rel = "stylesheet">
+		<link rel="stylesheet" href="../static/css/bootstrap.css">
+	</head>
+	<body>
+		<div class = "container">
+			<div class="collapse navbar-collapse" >
+			{% if g.user.is_authenticated() %}
+				<ul class="nav navbar-nav navbar-right">
+					<li> <a href = {{ g.url }}> {{ g.user.userid }} </a> </li>
+					<li> <a href = "/logout"> Log out </a> </li>
+				</ul>
+			{% endif %}
+		
+				<div class = "main">
+		            <ul class = "nav nav-tabs">
+		                <li> <a href = "/"> Homepage </a> </li>
+		                <li> <a href = "/problems/"> Problems </a> </li>
+		                <li> <a href = "#"> Status </a> </li> 
+		                <li> <a href = "#"> F.A.Q </a> </li> 
+		            </ul>
+				</div>
+			<center> <h1>Manager page</h1> </center>
+			</div>
+	    	<center>
+				<ul class="nav navbar-right">
+					<li>  <a href = "/addprb"> Add problem </a> </li>
+					<li>  <a href= {{ url_for('Editprb', problemid = 1) }}>Edit problem </a> </li> 
+				</ul>
+				</div>
+			</center>
+			</div>
+		</div>
+	</body>
+</html>
+
