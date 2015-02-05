@@ -56,19 +56,23 @@
 				</tbody>
 			</table>
 	 	</div>
-<!-- 	 	<nav>
+	 	<center>
+	 	<nav>
 		  <ul class="pagination">
-		    <li class="disabled"><a href="#"><span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span></a></li>
-		    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-		     {% if problemlist.has_prev %}
-	            <li><a href="#">&larr; Previous</a></li>
-	            {% endif %}
+		    {% if problemlist.has_prev %}
+	            <li><a href="{{ url_for('Problems', page = problemlist.prev_num) }}">&larr; Previous</a></li>
+	        {% else %}
+	            <li class = "disabled"><a>&larr; Previous</a></li>
+	        {% endif %}
 		    {% if problemlist.has_next %}
-	            <li><a href="#">Next &rarr;</a></li>
-	            {% endif %}
+	            <li><a href="{{ url_for('Problems', page = problemlist.next_num) }}">Next &rarr;</a></li>
+	        {% else %}
+	            <li class = "disabled"><a>Next &rarr;</a></li>
+	        {% endif %}
 		  </ul>
-		</nav> -->
-		 {% if problemlist.has_prev %}
+		</nav>
+		</center>
+		 <!-- {% if problemlist.has_prev %}
 		 <a href="{{ url_for('Problems', page = problemlist.prev_num) }}"><< Newer posts</a>
 		 {% else %}
 		 << Newer posts
@@ -78,7 +82,7 @@
 		<a href="{{ url_for('Problems', page = problemlist.next_num) }}">Older posts >></a>
 		{% else %}
 		Older posts >>
-		{% endif %}
+		{% endif %} -->
 	 	<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
 		<script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	 </body>

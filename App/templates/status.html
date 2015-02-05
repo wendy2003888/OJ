@@ -67,12 +67,12 @@
 		  {% if submit_list.has_prev%}
 		  	<li><a href="{{ url_for('Status', page = submit_list.prev_num) }}">&larr; Previous</a></li>
 		  {% else %}
-		  	<li><a href="#">&larr; Previous</a></li>
+		  	<li class = "disabled"><a>&larr; Previous</a></li>
 		  {% endif %} 
 		  {% if submit_list.has_next %}
 		  	<li><a href="{{ url_for('Status', page = submit_list.next_num) }}">Next &rarr;</a></li>
 			{% else %}
-			<li><a href="#">Next &rarr;</a></li>
+			<li class = "disabled"><a>Next &rarr;</a></li>
 			{% endif %}
 		  </ul>
 		</nav>
