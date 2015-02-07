@@ -55,8 +55,10 @@ class Problem(db.Model):
     ratio = db.Column(db.Float, default = 0.0)
     accnt = db.Column(db.Integer, default = 0)
     submitcnt = db.Column(db.Integer, default = 0)
+    timelmt = db.Column(db.Integer)
+    memorylmt = db.Column(db.Integer)
 
-    def __init__(self, title, description, pbinput, pboutput, sinput, soutput, hint):
+    def __init__(self, title, description, pbinput, pboutput, sinput, soutput, hint, timelmt, memorylmt):
         self.title = title
         self.description = description
         self.pbinput = pbinput
@@ -64,6 +66,8 @@ class Problem(db.Model):
         self.sinput = sinput
         self.soutput = soutput
         self.hint = hint
+        self.timelmt = timelmt
+        self.memorylmt = memorylmt
 
     def save(self):
         db.session.add(self)
@@ -80,8 +84,11 @@ class Submit(db.Model):
     memory = db.Column(db.Integer, default = None)
     jgtime = db.Column(db.Integer, default = None)
     language = db.Column(db.String(20))
-    codelen = db.Column(db.Integer, default = None)
+    codelen = db.Column(db.Integer)
     time = db.Column(db.String(20))
+    memory_used = db.Column(db.Integer, default = None)
+    time_used = db.Column(db.Integer, default = None)
+    CEmsg = db.Column(db.Text, default = None)
 
     def __init__(self, runid, userid, pbid, code, language, time):
         self.runid = runid
@@ -90,6 +97,7 @@ class Submit(db.Model):
         self.code = code
         self.language = language
         self.time = time
+        self.codelen = len(self.code)
 
 
     def save(self):

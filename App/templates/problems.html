@@ -22,8 +22,8 @@
 				<ul class = "nav nav-tabs">
 					<ul class = "nav nav-tabs">
 	                <li> <a href = "/"> Homepage </a> </li>
-	                <li> <a href = "/problems/"> Problems </a> </li>
-	                <li> <a href = "/status/"> Status </a> </li> 
+	                <li> <a href = {{ url_for("Problems", page = 1)}}> Problems </a> </li>
+	                <li> <a href = {{ url_for("Status", page = 1)}}> Status </a> </li> 
 	                <li> <a href = "/FAQ/"> F.A.Q </a> </li>
 	            </ul>
 				</ul>

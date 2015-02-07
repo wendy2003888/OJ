@@ -11,10 +11,12 @@
 			<div class = "nav" id="problem">
 	            <ul class = "nav nav-tabs">
 	                <li> <a href = "/"> Homepage </a> </li>
-	                <li> <a href = "/problems/"> Problems </a> </li>
-	                <li> <a href = "#"> Status </a> </li> 
-	                <li> <a href = "#"> F.A.Q </a> </li> 
+	                <li> <a href = {{ url_for("Problems")}}> Problems </a> </li>
+	                <li> <a href = {{ url_for("Status")}}> Status </a> </li> 
+	                <li> <a href = "/FAQ/"> F.A.Q </a> </li> 
 	            </ul>
+	    	</div>
+	    	<div>
 	    	</div>
 			<div id="jumbotron">
 				    <dl id = "problem">

@@ -7,10 +7,10 @@
 	<body>
 		<div class = "nav">
 			<ul>
-				<li> <a href = "/"> Homepage </a> </li>
-				<li> <a href = "/promlems/"> Problems </a> </li>
-				<li> <a href = "#"> Status </a> </li> 
-				<li> <a href = "#"> F.A.Q </a> </li> 
+                <li> <a href = "/"> Homepage </a> </li>
+                <li> <a href = {{ url_for("Problems")}}> Problems </a> </li>
+                <li> <a href = {{ url_for("Status")}}> Status </a> </li> 
+                <li> <a href = "/FAQ/"> F.A.Q </a> </li> 
 			</ul>
 		</div>
 		<form action = {{ url_for('Addprb')}} method = "POST" class = "form-tab">
@@ -30,23 +30,31 @@
                 </tr>
                 <tr>
                     <td><label for="pbinput"> {{ form.pbinput.label }} </label> </td>
-                    <td><textarea class="form-control" rows="3" value = {{ form.pbinput }} </textarea> </td>
+                    <td><textarea class="form-control" rows="3" value = {{ form.pbinput }}</textarea> </td>
                 </tr>
                 <tr>
                     <td><label for="pboutput"> {{ form.pboutput.label }} </label> </td>
-                    <td><textarea class="form-control" rows="3" value = {{ form.pboutput }}  </textarea> </td>
+                    <td><textarea class="form-control" rows="3" value = {{ form.pboutput }}</textarea> </td>
                 </tr>
                 <tr>
                     <td><label for="pbinput"> {{ form.sinput.label }} </label> </td>
-                    <td><textarea class="form-control" rows="3" value = {{ form.sinput }} </textarea> </td>
+                    <td><textarea class="form-control" rows="3" value = {{ form.sinput }}</textarea> </td>
                 </tr>
                 <tr>
                     <td><label for="pboutput"> {{ form.soutput.label }} </label> </td>
-                     <td><textarea class="form-control" rows="3" value = {{ form.soutput }}  </textarea> </td>
+                     <td><textarea class="form-control" rows="3" value = {{ form.soutput }}</textarea> </td>
                 </tr>
                 <tr>
                     <td><label for="hint"> {{ form.hint.label }} </label> </td>
-                    <td><textarea class="form-control" rows="3" value = {{ form.hint }}  </textarea></td>
+                    <td><textarea class="form-control" rows="3" value = {{ form.hint }}</textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="timelmt"> {{ form.timelmt.label }} </label> </td>
+                    <td><textarea class="form-control" rows="1" value = {{ form.timelmt }}</textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="memorylmt"> {{ form.memorylmt.label }} </label> </td>
+                    <td><textarea class="form-control" rows="1" value = {{ form.memorylmt }}</textarea></td>
                 </tr>
             </table>
             <tr>

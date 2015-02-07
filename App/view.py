@@ -99,13 +99,14 @@ def Sign_up():
 def Admin():
   return render_template('administrater.html')
 
+@app.route('/problems/')
 @app.route('/problems/page=<int:page>')
 def Problems(page = 1):
   pbnum = Problem.query.count()
   pagenum = (pbnum - 1) / ITEMS_ON_PAGE + 1
-  print pbnum, pagenum
-  # problemlist = Problem.query.paginate(page, ITEMS_ON_PAGE, False)
-  problemlist = Problem.query.paginate(page, 2 , False)
+  # print pbnum, pagenum
+  problemlist = Problem.query.paginate(page, ITEMS_ON_PAGE, False)
+  # problemlist = Problem.query.paginate(page, 2 , False)
   # problemlist = Problem.query.paginate(page, 2, False).items
   # pbs= problemlist.items
   # for p in pbs:
@@ -126,12 +127,13 @@ def Submits(problemid):
   if request.method == 'POST' and form.validate():
     submit = Submit(Submit.query.count() + 1 , g.user.userid, form.pbid.data,form.code.data, form.language.data, get_time() )
     submit.save()
-    return redirect(url_for('Status'))
+    return redirect(url_for('Status', page =  1))
   error = get_error(form)
   return render_template('submit.html', form = form, problem = problem, error = error)
 
+@app.route('/status/')
 @app.route('/status/page=<int:page>')
-def Status(page):
+def Status(page = 1):
   submit_list = Submit.query.order_by(Submit.runid.desc()).paginate(page, ITEMS_ON_PAGE, False)
   return render_template('status.html', submit_list = submit_list, page = page )
 
@@ -140,6 +142,11 @@ def Viewcode(runid):
   submit = Submit.query.filter_by(runid = runid).first()
   # submit.code
   return render_template('viewcode.html', submit = submit)
+
+@app.route("/show_compile_info/rid'='<runid>")
+def Show_compile_info(runid):
+  submit = Submit.query.get(runid)
+  return render_template('show_CE_info.html', submit = submit)
 
 @app.route('/FAQ/')
 def Faq():
@@ -162,7 +169,8 @@ def Addprb():
   if request.method == 'POST' and form.validate():
     problem = Problem(form.title.data, form.description.data, 
       form.pbinput.data, form.pboutput.data, 
-      form.sinput.data, form.soutput.data, form.hint.data)
+      form.sinput.data, form.soutput.data, form.hint.data,
+      form.timelmt.data, form.memorylmt.data)
     problem.save()
     return redirect(url_for('Problems', page = 1))
   error = get_error(form)
@@ -173,19 +181,13 @@ def Editprb(problemid):
   form = ProblemForm()
   pb = Problem.query.get(problemid)
   if request.method == 'GET':
-    form.title.data = pb.title
-    form.description.data = pb.description
-    form.pbinput.data = pb.pbinput
-    form.pboutput.data = pb.pboutput
-    form.sinput.data = pb.sinput
-    form.soutput.data = pb.soutput
-    form.hint.data = pb.hint
     return render_template('editprb.html', form = form, pb = pb)
   else:
-    print form.title.data, form.description.data, form.pbinput.data, form.pboutput.data, form.sinput.data, form.soutput.data, form.hint.data
+    # print form.title.data, form.description.data, form.pbinput.data, form.pboutput.data, form.sinput.data, form.soutput.data, form.hint.data
     Problem.query.filter_by(id = problemid).update({'title': form.title.data, 'description': form.description.data, 
       'pbinput': form.pbinput.data, 'pboutput': form.pboutput.data, 
-      'sinput': form.sinput.data, 'soutput': form.soutput.data, 'hint': form.hint.data})
+      'sinput': form.sinput.data, 'soutput': form.soutput.data, 'hint': form.hint.data, 
+      'timelmt' : form.timelmt.data, 'memorylmt' : form.memorylmt.data})
     # Problem.query.filter_by(id = pb.id).update(form.title.data, form.description.data, form.pbinput.data, form.pboutput.data, form.sinput.data, form.soutput.data, form.hint.data)
     db.session.commit()
     db.session.close()

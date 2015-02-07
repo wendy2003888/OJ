@@ -19,14 +19,12 @@
 						<li> <a href = "/sign_up"> Sign up </a> </li> 
 					</ul>
 				{% endif %}
-				<ul class = "nav nav-tabs">
-					<ul class = "nav nav-tabs">
-		                <li> <a href = "/"> Homepage </a> </li>
-		                <li> <a href = {{ url_for("Problems", page = 1)}}> Problems </a> </li>
-		                <li> <a href = {{ url_for("Status", page = 1)}}> Status </a> </li> 
-		                <li> <a href = "/FAQ/"> F.A.Q </a> </li> 
-	            	</ul>
-				</ul>
+	            <ul class = "nav nav-tabs">
+	                <li> <a href = "/"> Homepage </a> </li>
+	                <li> <a href = {{ url_for("Problems")}}> Problems </a> </li>
+	                <li> <a href = {{ url_for("Status")}}> Status </a> </li> 
+	                <li> <a href = "/FAQ/"> F.A.Q </a> </li> 
+	            </ul>
 			</div>
 			<div id = "jumbotron">
 				<table  class="table table-striped table-bordered">
@@ -44,12 +42,18 @@
 						</tr>
 					</thread>
 					<tbody>
-						{% for submit in submit_list.item %}
-							<tr>
+						{% for submit in submit_list.items %}
+						<tr>
 							<td> {{ submit.runid }} </td>
 							<td><a href = {{ g.url }}> {{ submit.userid }} </a> </td>
 							<td><a href = {{ url_for("Showprb", problemid = submit.pbid )}}> {{ submit.pbid }}  </a> </td>
-							<td> {{ submit.result }} </td>
+							{% if submit.result == 'Compile Error' %}
+                        		<td><a href={{ url_for('Show_compile_info',runid = submit.runid) }}>{{ submit.result }}</a></td>
+                        	{% elif submit.result == 'Accepted' %}
+                        		<td id = 'AC'> {{ submit.result }} </td>
+		                    {% else %}
+		                        <td> {{ submit.result }} </td>
+		                    {% endif %}
 							<td> {{ submit.memory }} </td>
 							<td> {{ submit.jgtime }} </td>
 							<td> <a href = {{ url_for("Viewcode", runid = submit.runid) }}>{{ submit.language }} </a> </td>

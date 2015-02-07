@@ -59,13 +59,19 @@ class ProblemForm(Form):
 	hint = TextField('Hint',[
 		validators.length(max = 9999, message = 'The max length of Hint should not over 10000,')
 		])
+	timelmt = TextField('Time Limit',[
+		validators.InputRequired(message = 'Please enter Time Limit.')
+		])
+	memorylmt = TextField('Memory Limit',[
+		validators.InputRequired(message = 'Please enter Memory Limit.')
+		])
 
 
 class SubmitForm(Form):
 	pbid = TextField('ProblemID', [
 		validators.InputRequired(message = 'Problem, ID must not be None.')
 		])
-	language = SelectField('Language',choices = [('G++','G++'),('C++','C++'),('Python2.7','Python2.7')])
+	language = SelectField('Language',choices = [('G++','G++'),('C++','C++'),('C','C'),('Python2.7','Python2.7')])
 	code = TextField('Source Code',[
 		validators.DataRequired( message = 'Source Code must not be None.')
 		])
