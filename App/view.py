@@ -1,9 +1,9 @@
 from App import app, loginmng, db
 from flask import url_for, render_template, request, redirect, g, flash
 from flask.ext.login import login_user,login_required, current_user, logout_user
-from forms import RegisterForm, LoginForm, EditForm, ProblemForm, SubmitForm, DiscussForm, ReplyForm
+from forms import RegisterForm, LoginForm, EditForm, ProblemForm, SubmitForm, DiscussForm, ReplyForm, InfoForm
 from config import Useriderr, Passworderr, UserWrong, UserConflict, PasswordWrong, Permissionerr, ITEMS_ON_PAGE, POST_PER_PAGE
-from models import User, Problem, Submit, Forum, Reply
+from models import User, Problem, Submit, Forum, Reply, Info
 import time
 
 @loginmng.user_loader
@@ -15,6 +15,9 @@ def before_request():
   g.user = current_user
   if g.user.is_authenticated():
     g.url = url_for('Profile', userid = g.user.userid)
+  info = Info.query.order_by(Info.id.desc()).first()
+  g.info = info.contents
+
 
 def get_error(form):
   error = None
@@ -176,13 +179,28 @@ def Show_comment(cid, page = 1):
   return render_template('show_comment.html', page = page, form = form, comment = comment, replylist = replylist)
 
 
-@app.route('/manage/')
+@app.route('/manage/', methods = ['GET', 'POST'])
 @login_required
 def Manage():
   if not g.user.is_admin():
     flash(Permissionerr)
     return redirect(url_for('Profile', userid = g.user.userid))
-  return render_template('manage.html')
+  form = InfoForm()
+  infolist = Info.query.order_by(Info.id.desc()).all()
+  if request.method == 'POST' and form.validate() :
+    info = Info(g.user.userid, form.contents.data, get_time())
+    info.save()
+    return redirect(url_for('Manage'))
+  return render_template('manage.html', form = form, infolist = infolist)
+
+@app.route('/delinfo/<iid>')
+def Del_info(iid):
+  Info.query.get(iid).delete()
+  db.session.commit()
+  db.session.close()
+  return redirect( url_for('Manage') )
+
+  
 
 @app.route('/addprb/', methods = ['GET', 'POST'])
 def Addprb():
@@ -193,7 +211,7 @@ def Addprb():
     problem = Problem(form.title.data, form.description.data, 
       form.pbinput.data, form.pboutput.data, 
       form.sinput.data, form.soutput.data, form.hint.data,
-      form.timelmt.data, form.memorylmt.data)
+      form.timelmt.data, form.memorylmt.data, bool(form.visible.data) ) 
     problem.save()
     return redirect(url_for('Problems', page = 1))
   error = get_error(form)
@@ -210,8 +228,25 @@ def Editprb(problemid):
     Problem.query.filter_by(id = problemid).update({'title': form.title.data, 'description': form.description.data, 
       'pbinput': form.pbinput.data, 'pboutput': form.pboutput.data, 
       'sinput': form.sinput.data, 'soutput': form.soutput.data, 'hint': form.hint.data, 
-      'timelmt' : form.timelmt.data, 'memorylmt' : form.memorylmt.data})
+      'timelmt' : form.timelmt.data, 'memorylmt' : form.memorylmt.data, 'visible':bool(form.visible.data) })
     # Problem.query.filter_by(id = pb.id).update(form.title.data, form.description.data, form.pbinput.data, form.pboutput.data, form.sinput.data, form.soutput.data, form.hint.data)
     db.session.commit()
     db.session.close()
   return redirect(url_for('Showprb', problemid = problemid))
+
+@app.route('/delprb/')
+@app.route('/delprb/<problemid>')
+def Deleteprb(pbid):
+  pb = Problem.query.get(pbid).delete()
+  db.session.commit()
+  db.session.close()
+  return redirect( url_for('Problems') )
+
+@app.route('/admin/setvisibility/')
+@app.route('/admin/setvisibility/<int:pbid>/')
+def Set_visibility(pbid, visibility):
+  problem = Problem.query.get(pbid)
+  problem.visable = visibility
+  db.session.commit()
+  db.session.close()
+  return redirect(url_for('Problems'))

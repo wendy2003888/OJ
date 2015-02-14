@@ -1,38 +1,50 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<link href = "../static/css/main.css" rel = "stylesheet">
-		<link rel="stylesheet" href="../static/css/bootstrap.css">
-	</head>
+
+{% extends "base.html" %}
+{% block content %}
 	<body>
-		<div class = "container">
-			<div class="collapse navbar-collapse" >
-			{% if g.user.is_authenticated() %}
-				<ul class="nav navbar-nav navbar-right">
-					<li> <a href = {{ g.url }}> {{ g.user.userid }} </a> </li>
-					<li> <a href = "/logout"> Log out </a> </li>
-				</ul>
-			{% endif %}
-		
-				<div class = "main">
-		            <ul class = "nav nav-tabs">
-		                <li> <a href = "/"> Homepage </a> </li>
-		                <li> <a href = "/problems/"> Problems </a> </li>
-		                <li> <a href = "#"> Status </a> </li> 
-		                <li> <a href = "#"> F.A.Q </a> </li> 
-		            </ul>
-				</div>
-			<center> <h1>Manager page</h1> </center>
+		<center> <h1>Manager page</h1> </center>
+		<div class="collapse navbar-collapse" >
+		{% if g.user.is_authenticated() %}
+			<ul class="nav navbar-nav navbar-right">
+				<li> <a href = {{ g.url }}> {{ g.user.userid }} </a> </li>
+				<li> <a href = "/logout"> Log out </a> </li>
+			</ul>
+		{% endif %}
+	
+			<div class = "main">
+	            <ul class = "nav nav-tabs">
+	                <li> <a href = "/"> Homepage </a> </li>
+	                <li> <a href = "/problems/"> Problems </a> </li>
+	                <li> <a href = "#"> Status </a> </li> 
+	                <li> <a href = "#"> F.A.Q </a> </li> 
+	            </ul>
 			</div>
-	    	<center>
-				<ul class="nav navbar-right">
-					<li>  <a href = "/addprb"> Add problem </a> </li>
-					<li>  <a href= {{ url_for('Editprb', problemid = 1) }}>Edit problem </a> </li> 
-				</ul>
+		</div>
+		<div class = "container">
+			<ul class="nav navbar-right">
+				<li> <a href = "{{ url_for('Problems') }}"> Manage problems </a> </li>
+			</ul>
+			<h4>Post Information </h4>
+			<form action = {{ url_for('Manage')}} method = "POST" class = "form-tab">
+			{{ form.csrf_token }}
+			<label for="info"> {{ form.contents.label }} </label> </td>
+            {{ form.contents }}
+            <br/>
+            <button type="submit" >Submit</button>
+				<div>
+				{% for info in infolist %}
+					<div>
+                        <h3 class="panel-title">
+                        No.{{ info.id }} User: {{ info.userid }} Time:{{ info.time }}
+                        <a href = {{ url_for('Del_info', iid = info.id)}} class="btn btn-warning btn-sm"> Delete </a>
+                        </h3>
+                        <pre>{{ info.contents }}</pre>
+                    </div>
+				{% endfor %}
 				</div>
-			</center>
 			</div>
 		</div>
 	</body>
-</html>
+{% endblock %}
+
 

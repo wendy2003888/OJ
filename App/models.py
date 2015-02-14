@@ -38,10 +38,6 @@ class User(db.Model):
     def get_id(self):
         return unicode(self.userid)
 
-
-    # def dis(self):
-    #     print self.userid, self.password
-
     def __repr__(self):
         return '<User %s>' % (self.userid)
 
@@ -59,8 +55,9 @@ class Problem(db.Model):
     submitcnt = db.Column(db.Integer, default = 0)
     timelmt = db.Column(db.Integer)
     memorylmt = db.Column(db.Integer)
+    visible = db.Column(db.Boolean)
 
-    def __init__(self, title, description, pbinput, pboutput, sinput, soutput, hint, timelmt, memorylmt):
+    def __init__(self, title, description, pbinput, pboutput, sinput, soutput, hint, timelmt, memorylmt, visible):
         self.title = title
         self.description = description
         self.pbinput = pbinput
@@ -70,6 +67,10 @@ class Problem(db.Model):
         self.hint = hint
         self.timelmt = timelmt
         self.memorylmt = memorylmt
+        self.visible = visible
+
+    def is_visible(self):
+        return self.visible
 
     def save(self):
         db.session.add(self)
@@ -140,6 +141,22 @@ class Reply(db.Model):
         self.contents = contents
         self.time = time
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        db.session.close()
+
+class Info(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    userid = db.Column(db.String(22))
+    contents = db.Column(db.Text)
+    time = db.Column(db.String(20))
+
+    def __init__(self, userid, contents, time):
+        self.userid = userid
+        self.contents = contents
+        self.time = time
+        
     def save(self):
         db.session.add(self)
         db.session.commit()

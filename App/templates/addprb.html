@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html>
+
+{% extends "base.html" %}
+{% block content %}
 	<head>
 		<center> <h1>Add problems </h1> </center>
   		<link rel="stylesheet" href="../static/css/Formstyle.css">
 	</head>
 	<body>
-		<div class = "nav">
-			<ul>
-                <li> <a href = "/"> Homepage </a> </li>
-                <li> <a href = {{ url_for("Problems")}}> Problems </a> </li>
-                <li> <a href = {{ url_for("Status")}}> Status </a> </li> 
-                <li> <a href = "/FAQ/"> F.A.Q </a> </li> 
-			</ul>
-		</div>
 		<form action = {{ url_for('Addprb')}} method = "POST" class = "form-tab">
 			{{ form.csrf_token }}
             {% if error %}
@@ -56,10 +49,13 @@
                     <td><label for="memorylmt"> {{ form.memorylmt.label }} </label> </td>
                     <td><textarea class="form-control" rows="1" value = {{ form.memorylmt }}</textarea></td>
                 </tr>
+                <tr>
+                    <td>{{ form.visible }}</td>
+                </tr>
             </table>
             <tr>
                     <button type="submit" >Submit</button>
             </tr>
 	    </form>
 	</body>
-</html>
+{% endblock %}

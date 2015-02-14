@@ -35,37 +35,37 @@ class EditForm(Form):
     	])
 
 class ProblemForm(Form):
-	title = TextField('Title', [
-		validators.InputRequired(message = 'Title must not be None.'),
-		validators.Length(max = 300, message = 'The max length of Title should not over 300.')
-		])
-	description = TextField('Description',[
-		validators.length(max = 9999, message = 'The max length of description should not over 10000,')
-		])
-	pbinput = TextField('Input', [
-		validators.InputRequired(message = 'Please enter problem input.'),
-		validators.length(max = 9999, message = 'The max length of Input should not over 10000,')
-		])
-	pboutput = TextField('Output', [
-		validators.InputRequired(message = 'Please enter problem output.'),
-		validators.length(max = 9999, message = 'The max length  of Output should not over 10000,')
-		])
-	sinput = TextField('Sample Input',[
-		validators.length(max = 9999, message = 'The max length of Sample Input should not over 10000,')
-		])
-	soutput = TextField('Sample Output',[
-		validators.length(max = 9999, message = 'The max length should of Sample Output not over 10000,')
-		])
-	hint = TextField('Hint',[
-		validators.length(max = 9999, message = 'The max length of Hint should not over 10000,')
-		])
-	timelmt = TextField('Time Limit',[
-		validators.InputRequired(message = 'Please enter Time Limit.')
-		])
-	memorylmt = TextField('Memory Limit',[
-		validators.InputRequired(message = 'Please enter Memory Limit.')
-		])
-
+    title = TextField('Title', [
+        validators.InputRequired(message = 'Title must not be None.'),
+        validators.Length(max = 300, message = 'The max length of Title should not over 300.')
+        ])
+    description = TextField('Description',[
+        validators.length(max = 9999, message = 'The max length of description should not over 10000,')
+        ])
+    pbinput = TextField('Input', [
+        validators.InputRequired(message = 'Please enter problem input.'),
+        validators.length(max = 9999, message = 'The max length of Input should not over 10000,')
+        ])
+    pboutput = TextField('Output', [
+        validators.InputRequired(message = 'Please enter problem output.'),
+        validators.length(max = 9999, message = 'The max length  of Output should not over 10000,')
+        ])
+    sinput = TextField('Sample Input',[
+        validators.length(max = 9999, message = 'The max length of Sample Input should not over 10000,')
+        ])
+    soutput = TextField('Sample Output',[
+        validators.length(max = 9999, message = 'The max length should of Sample Output not over 10000,')
+        ])
+    hint = TextField('Hint',[
+        validators.length(max = 9999, message = 'The max length of Hint should not over 10000,')
+        ])
+    timelmt = TextField('Time Limit',[
+        validators.InputRequired(message = 'Please enter Time Limit.')
+        ])
+    memorylmt = TextField('Memory Limit',[
+        validators.InputRequired(message = 'Please enter Memory Limit.')
+        ])
+    visible = SelectField('Language',choices = [('False','False'),('True','True')])
 
 class SubmitForm(Form):
 	pbid = TextField('ProblemID', [
@@ -86,3 +86,6 @@ class DiscussForm(Form):
 
 class ReplyForm(Form):
     contents = TextField('Reply')
+
+class InfoForm(Form):
+    contents = TextField('Info')

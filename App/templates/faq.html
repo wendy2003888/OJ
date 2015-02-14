@@ -1,32 +1,37 @@
-<!DOCTYPE html>
-<html>
+
+{% extends "base.html" %}
+{% block content %}
 	<head>
-	 	<link href = "../static/css/main.css" rel = "stylesheet">
-	 	<link rel="stylesheet" href="../static/css/bootstrap.css">
+		<center> <h1> F.A.Q </h1> </center>
 	</head>
 	<body>
-		<center> <h1> F.A.Q </h1> </center>
-		<div class="container">
-		 	<div class="collapse navbar-collapse" >
-			 	{% if g.user.is_authenticated() %}
-					 <ul class="nav navbar-nav navbar-right">
-						<li> <a href = {{ g.url }}> {{ g.user.userid }} </a> </li>
-						<li> <a href = "/logout"> Log out </a> </li>
-					</ul>
-				{% else %}
-					<ul class = "nav navbar-nav navbar-right">
-						<li> <a href = "/login"> Login </a> </li>
-						<li> <a href = "/sign_up"> Sign up </a> </li> 
-					</ul>
-				{% endif %}
+		<div class="collapse navbar-collapse" >
+		 	{% if g.user.is_authenticated() %}
+				 <ul class="nav navbar-nav navbar-right">
+					<li> <a href = {{ g.url }}> {{ g.user.userid }} </a> </li>
+					<li> <a href = "/logout"> Log out </a> </li>
+				</ul>
+			{% else %}
+				<ul class = "nav navbar-nav navbar-right">
+					<li> <a href = "/login"> Login </a> </li>
+					<li> <a href = "/sign_up"> Sign up </a> </li> 
+				</ul>
+			{% endif %}
+			<ul class = "nav nav-tabs">
 				<ul class = "nav nav-tabs">
-					<ul class = "nav nav-tabs">
-	                <li> <a href = "/"> Homepage </a> </li>
-	                <li> <a href = "/problems/"> Problems </a> </li>
-	                <li> <a href = "/status/"> Status </a> </li> 
-	                <li> <a href = "/FAQ/"> F.A.Q </a> </li>
-	            </ul>
-			</div>
+                <li> <a href = "/"> Homepage </a> </li>
+                <li> <a href = {{ url_for("Problems", page = 1)}}> Problems </a> </li>
+                <li> <a href = {{ url_for("Status", page = 1)}}> Status </a> </li> 
+                <li> <a href = "/FAQ/"> F.A.Q </a> </li>
+            </ul>
+			</ul>
+			{% if g.user.is_admin() %}
+				<ul class="nav navbar-nav navbar-right">
+					<li>  <a href = "/addprb"> Add problem </a> </li>
+				</ul>
+			{% endif %}
+		</div>
+		<div class="container">
 			<div class = "jumbotron" id = "jumbotron">
 				<p>
 	            Q: What is the compiler the judge is using and what are the compiler options?
@@ -157,4 +162,4 @@
 
 		</div>
 	</body>
-</html>
+{% endblock %}
