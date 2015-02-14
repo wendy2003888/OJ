@@ -38,7 +38,7 @@
 				<div class="btn-group" role="group" id = "submit">
 					<a href= {{ url_for('Submits', problemid = problem.id) }} class="btn btn-default" role="button"> Submit </a>
 					<a href= "/status/"class="btn btn-default" role="button"> Statistic </a>
-					<a  class="btn btn-default" role="button" href= "{{ url_for('Discuss', pbid = problem.id, page = 1) }}"> Discuss </a>
+					<a  class="btn btn-default" role="button" href= "{{ url_for('Discuss', pbid = problem.id) }}"> Discuss </a>
 				</div>
 			</center>
 		</div>

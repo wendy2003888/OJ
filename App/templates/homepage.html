@@ -4,15 +4,6 @@
 		<link rel="stylesheet" type="text/css" href="../static/css/main.css" >
 		<link rel="stylesheet" href="../static/css/bootstrap.css">
 		<link href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/shift.css" rel="stylesheet">
-		<style type="text/css">
-		p {
-			color : Black;
-			margin-left : 5px;
-		}
-		ul {
-			color : Teal
-		}
-		</style>
 
 	</head>
 
@@ -35,6 +26,7 @@
 	                <li> <a href = "/"> Homepage </a> </li>
 	                <li> <a href = {{ url_for("Problems")}}> Problems </a> </li>
 	                <li> <a href = {{ url_for("Status")}}> Status </a> </li> 
+	                <li> <a href = {{ url_for("Ranklist") }}> Ranklist </a> </li>
 	                <li> <a href = "/FAQ/"> F.A.Q </a> </li> 
 	            </ul>
 			</div>
@@ -42,14 +34,12 @@
 
 		<div class = "jumbotron" id = "jumbotron">
 			<div class = "Head">
-				<h1 align="center"> <bold> Hello </bold> </h1>
+				<h1 align="center"> <bold> Welcome to <br/>Online Judge System </bold> </h1>
 				<hr/>
 				<br/>
 			</div>
 			<div class = "container">
-					<p>
-					test.
-					</p>
+				Still has problems on Judge part.
 			</div>
 		</div>
 		<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>

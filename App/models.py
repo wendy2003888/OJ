@@ -8,7 +8,7 @@ class User(db.Model):
     role = db.Column(db.Boolean)
     email = db.Column(db.String(100), unique = True)
     accnt = db.Column(db.Integer, default = 0)
-    submition = db.Column(db.Integer, default = 0)
+    submission = db.Column(db.Integer, default = 0)
 
 
 

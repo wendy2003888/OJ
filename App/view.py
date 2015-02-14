@@ -104,13 +104,7 @@ def Admin():
 def Problems(page = 1):
   pbnum = Problem.query.count()
   pagenum = (pbnum - 1) / ITEMS_ON_PAGE + 1
-  # print pbnum, pagenum
   problemlist = Problem.query.paginate(page, ITEMS_ON_PAGE, False)
-  # problemlist = Problem.query.paginate(page, 2 , False)
-  # problemlist = Problem.query.paginate(page, 2, False).items
-  # pbs= problemlist.items
-  # for p in pbs:
-  #   print p
   return render_template('problems.html', problemlist = problemlist, page = page, pagenum = pagenum)
 
 @app.route('/problems/<problemid>')
@@ -140,7 +134,6 @@ def Status(page = 1):
 @app.route('/viewcode/rid=<runid>')
 def Viewcode(runid):
   submit = Submit.query.filter_by(runid = runid).first()
-  # submit.code
   return render_template('viewcode.html', submit = submit)
 
 @app.route("/show_compile_info/rid'='<runid>")
@@ -148,10 +141,18 @@ def Show_compile_info(runid):
   submit = Submit.query.get(runid)
   return render_template('show_CE_info.html', submit = submit)
 
+@app.route('/ranklist/')
+@app.route('/ranklist/<int:page>/')
+def Ranklist(page = 1):
+    user_list = User.query.order_by(User.accnt.desc(), User.submission, User.userid).paginate(page,ITEMS_ON_PAGE, False)
+    return render_template('ranklist.html', page = page, user_list = user_list, strank = ITEMS_ON_PAGE * (page - 1) )
+
+
 @app.route('/FAQ/')
 def Faq():
   return render_template('faq.html')
 
+@app.route('/discuss/pid=<pbid>', methods = ['GET', 'POST'])
 @app.route('/discuss/pid=<pbid>?page=<int:page>', methods = ['GET', 'POST'])
 def Discuss(pbid, page = 1):
   postlist = Forum.query.filter_by(pbid = pbid).order_by(Forum.id.desc()).paginate(page, POST_PER_PAGE, False)
@@ -159,9 +160,10 @@ def Discuss(pbid, page = 1):
   if request.method == 'POST' and form.validate():
     forum = Forum(pbid, g.user.userid, form.title.data, form.contents.data, get_time())
     forum.save()
-    return redirect(url_for('Discuss', pbid = pbid, page = page))
+    return redirect(url_for('Discuss', pbid = pbid))
   return render_template('discuss.html', page = page, form = form, pbid = pbid, postlist = postlist)
 
+@app.route('/comment/id=<cid>', methods = ['GET', 'POST'])
 @app.route('/comment/id=<cid>?page=<int:page>', methods = ['GET', 'POST'])
 def Show_comment(cid, page = 1):
   form = ReplyForm()
@@ -170,12 +172,8 @@ def Show_comment(cid, page = 1):
   if request.method == 'POST' and form.validate() :
     reply = Reply(cid, g.user.userid, form.contents.data, get_time())
     reply.save()
-    return redirect(url_for('Show_comment', cid = cid, page = 1))
+    return redirect(url_for('Show_comment', cid = cid))
   return render_template('show_comment.html', page = page, form = form, comment = comment, replylist = replylist)
-
-# @app.route('/reply/pid=<pbid>?')
-# def Reply(pbid):
-#   form = ReplyForm()
 
 
 @app.route('/manage/')

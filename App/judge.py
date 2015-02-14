@@ -60,7 +60,7 @@ def worker():
         # dblock.release()
         problem.submitcnt += 1
         problem.ratio = problem.accnt * 1.0 / problem.submitcnt
-        user.submition += 1
+        user.submission += 1
         db.session.commit()
 
         Q.task_done()
