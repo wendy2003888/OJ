@@ -60,11 +60,11 @@
 		                	<td>{{ problem.visible}}</td>
 			                {% if problem.is_visible() %}
 				                <td>
-				                    <a href={{ url_for('Set_visibility', pbid = problem.id, visibility = False) }} class="btn btn-primary btn-sm"> Hide </a>
+				                    <a href="{{ url_for('Set_visibility', pbid = problem.id, visibility = False) }}" class="btn btn-primary btn-sm"> Hide </a>
 				                </td>
 			                {% else %}
 				                <td>
-				                    <a href={{ url_for('Set_visibility',pbid = problem.id, visibility = True) }} class="btn btn-primary btn-sm"> Display </a>
+				                    <a href="{{ url_for('Set_visibility',pbid = problem.id, visibility = True) }}" class="btn btn-primary btn-sm"> Display </a>
 				                </td>
 			                {% endif %}
 			                <td>

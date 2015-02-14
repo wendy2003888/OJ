@@ -107,7 +107,12 @@ def Admin():
 def Problems(page = 1):
   pbnum = Problem.query.count()
   pagenum = (pbnum - 1) / ITEMS_ON_PAGE + 1
-  problemlist = Problem.query.paginate(page, ITEMS_ON_PAGE, False)
+  if g.user.is_admin():
+    problemlist = Problem.query.paginate(page, ITEMS_ON_PAGE, False)
+    for i in problemlist.items:
+      print i.visible
+  else:
+    problemlist = Problem.query.filter_by(visible = True).paginate(page, ITEMS_ON_PAGE, False)
   return render_template('problems.html', problemlist = problemlist, page = page, pagenum = pagenum)
 
 @app.route('/problems/<problemid>')
@@ -208,10 +213,14 @@ def Addprb():
   if request.method == 'GET':
     return render_template('addprb.html', form = form)
   if request.method == 'POST' and form.validate():
+    if form.visible.data == 'True':
+      vis = True
+    else:
+      vis = False
     problem = Problem(form.title.data, form.description.data, 
       form.pbinput.data, form.pboutput.data, 
       form.sinput.data, form.soutput.data, form.hint.data,
-      form.timelmt.data, form.memorylmt.data, bool(form.visible.data) ) 
+      form.timelmt.data, form.memorylmt.data, vis ) 
     problem.save()
     return redirect(url_for('Problems', page = 1))
   error = get_error(form)
@@ -224,15 +233,17 @@ def Editprb(problemid):
   if request.method == 'GET':
     return render_template('editprb.html', form = form, pb = pb)
   else:
-    # print form.title.data, form.description.data, form.pbinput.data, form.pboutput.data, form.sinput.data, form.soutput.data, form.hint.data
+    if form.visible.data == 'True':
+      vis = True
+    else:
+      vis = False
     Problem.query.filter_by(id = problemid).update({'title': form.title.data, 'description': form.description.data, 
       'pbinput': form.pbinput.data, 'pboutput': form.pboutput.data, 
       'sinput': form.sinput.data, 'soutput': form.soutput.data, 'hint': form.hint.data, 
-      'timelmt' : form.timelmt.data, 'memorylmt' : form.memorylmt.data, 'visible':bool(form.visible.data) })
-    # Problem.query.filter_by(id = pb.id).update(form.title.data, form.description.data, form.pbinput.data, form.pboutput.data, form.sinput.data, form.soutput.data, form.hint.data)
+      'timelmt' : form.timelmt.data, 'memorylmt' : form.memorylmt.data, 'visible':vis })
     db.session.commit()
     db.session.close()
-  return redirect(url_for('Showprb', problemid = problemid))
+    return redirect(url_for('Showprb', problemid = problemid))
 
 @app.route('/delprb/')
 @app.route('/delprb/<problemid>')
@@ -242,11 +253,14 @@ def Deleteprb(pbid):
   db.session.close()
   return redirect( url_for('Problems') )
 
-@app.route('/admin/setvisibility/')
-@app.route('/admin/setvisibility/<int:pbid>/')
+@app.route('/setvisibility/<int:pbid><visibility>')
 def Set_visibility(pbid, visibility):
-  problem = Problem.query.get(pbid)
-  problem.visable = visibility
+  if visibility == 'False':
+    vis  = False
+  else:
+    vis = True
+  print vis
+  Problem.query.filter_by(id=pbid).update({'visible': vis})
   db.session.commit()
-  db.session.close()
+  # db.session.close()
   return redirect(url_for('Problems'))
