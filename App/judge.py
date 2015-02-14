@@ -51,6 +51,7 @@ def worker():
         if result == 'Accepted':
             Submit.query.filter_by(runid = runid).update({'result': result})
             problem.accnt += 1
+            user.accnt += 1
         else:
             Submit.query.filter_by(runid = runid).update({'result': result})
 
@@ -58,6 +59,8 @@ def worker():
         # update_result(result) 
         # dblock.release()
         problem.submitcnt += 1
+        problem.ratio = problem.accnt * 1.0 / problem.submitcnt
+        user.submition += 1
         db.session.commit()
 
         Q.task_done()
@@ -92,46 +95,46 @@ def compile(runid, language):
 
 
 def Judge(runid, pbid, language):
-	name = {
-	'G++' : 'main.cpp',
-	'C' : 'main.c',
-	'C++' : 'main.cpp',
-	'Python2.7' : 'main.py'
-	}
-	Store_code(runid, name[language])
-	inputfile = open(os.path.join(PRB_FOLDER, str(pbid)+'.in' ))
-	outputfile = open(os.path.join(PRB_FOLDER, str(pbid)+'.out'))
-	tmpfile = open(os.path.join(JUDGE_FOLDER, str(runid)), 'w')
-	timelmt = Problem.query.get(pbid).timelmt
-	memorylmt = Problem.query.get(pbid).memorylmt
+    name = {
+    'G++' : 'main.cpp',
+    'C' : 'main.c',
+    'C++' : 'main.cpp',
+    'Python2.7' : 'main.py'
+    }
+    Store_code(runid, name[language])
+    inputfile = open(os.path.join(PRB_FOLDER, str(pbid)+'.in' ))
+    outputfile = open(os.path.join(PRB_FOLDER, str(pbid)+'.out'))
+    tmpfile = open(os.path.join(JUDGE_FOLDER, str(runid)), 'w')
+    timelmt = Problem.query.get(pbid).timelmt
+    memorylmt = Problem.query.get(pbid).memorylmt
 
-	if not compile(runid, language):
-		return (JUDGE_RESULT[7], None)
-	if language == 'Python2.7':
-		timelmt *= PYTHON_TIME_LIMIT_TIMES
-		memorylmt *= PYTHON_MEMORY_LIMIT_TIMES
-		cmd = 'python2.7 %s' % (os.path.join(JUDGE_FOLDER, 'main.pyc'))
-		main_exe = shlex.split(cmd)
-	else:
-		main_exe = [os.path.join(JUDGE_FOLDER, 'main'), ]
+    if not compile(runid, language):
+        return (JUDGE_RESULT[7], None)
+    if language == 'Python2.7':
+        timelmt *= PYTHON_TIME_LIMIT_TIMES
+        memorylmt *= PYTHON_MEMORY_LIMIT_TIMES
+        cmd = 'python2.7 %s' % (os.path.join(JUDGE_FOLDER, 'main.pyc'))
+        main_exe = shlex.split(cmd)
+    else:
+        main_exe = [os.path.join(JUDGE_FOLDER, 'main'), ]
 
-	runcfg = {
-		'args': main_exe,
-        'fd_in': inputfile.fileno(),
-        'fd_out': tmpfile.fileno(),
-        'timelimit': timelmt,
-        'memorylimit': memorylmt
-	}
-	# rst = lorun.run(runcfg)
-	inputfile.close()
-	tmpfile.close()
-	tmpfile = open(os.path.join(JUDGE_FOLDER, str(runid)))
+    runcfg = {
+    'args': main_exe,
+    'fd_in': inputfile.fileno(),
+    'fd_out': tmpfile.fileno(),
+    'timelimit': timelmt,
+    'memorylimit': memorylmt
+    }
+    # rst = lorun.run(runcfg)
+    inputfile.close()
+    tmpfile.close()
+    tmpfile = open(os.path.join(JUDGE_FOLDER, str(runid)))
 
-	# if rst['result'] == 0:
-	# 	crst = lorun.check(outputfile.fileno(), tmpfile.fileno())
- #        #lorun.check() returns a number which means the final result
- #        outputfile.close()
- #        tmpfile.close()
- #        rst['result'] = crst
- 	return ('Accepted', None)
-	# return JUDGE_RESULT[rst['result']],rst
+    return ('Accepted', None)
+# if rst['result'] == 0:
+#   crst = lorun.check(outputfile.fileno(), tmpfile.fileno())
+#        #lorun.check() returns a number which means the final result
+#        outputfile.close()
+#        tmpfile.close()
+#        rst['result'] = crst
+# return JUDGE_RESULT[rst['result']],rst

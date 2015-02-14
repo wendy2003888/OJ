@@ -1,9 +1,9 @@
 from App import app, loginmng, db
 from flask import url_for, render_template, request, redirect, g, flash
 from flask.ext.login import login_user,login_required, current_user, logout_user
-from forms import RegisterForm, LoginForm, EditForm, ProblemForm, SubmitForm
-from config import Useriderr, Passworderr, UserWrong, UserConflict, PasswordWrong, Permissionerr, ITEMS_ON_PAGE
-from models import User, Problem, Submit
+from forms import RegisterForm, LoginForm, EditForm, ProblemForm, SubmitForm, DiscussForm, ReplyForm
+from config import Useriderr, Passworderr, UserWrong, UserConflict, PasswordWrong, Permissionerr, ITEMS_ON_PAGE, POST_PER_PAGE
+from models import User, Problem, Submit, Forum, Reply
 import time
 
 @loginmng.user_loader
@@ -151,6 +151,31 @@ def Show_compile_info(runid):
 @app.route('/FAQ/')
 def Faq():
   return render_template('faq.html')
+
+@app.route('/discuss/pid=<pbid>?page=<int:page>', methods = ['GET', 'POST'])
+def Discuss(pbid, page = 1):
+  postlist = Forum.query.filter_by(pbid = pbid).order_by(Forum.id.desc()).paginate(page, POST_PER_PAGE, False)
+  form = DiscussForm()
+  if request.method == 'POST' and form.validate():
+    forum = Forum(pbid, g.user.userid, form.title.data, form.contents.data, get_time())
+    forum.save()
+    return redirect(url_for('Discuss', pbid = pbid, page = page))
+  return render_template('discuss.html', page = page, form = form, pbid = pbid, postlist = postlist)
+
+@app.route('/comment/id=<cid>?page=<int:page>', methods = ['GET', 'POST'])
+def Show_comment(cid, page = 1):
+  form = ReplyForm()
+  comment = Forum.query.get(cid)
+  replylist = Reply.query.filter_by(cid = cid).order_by(Reply.id.desc()).paginate(page, POST_PER_PAGE, False)
+  if request.method == 'POST' and form.validate() :
+    reply = Reply(cid, g.user.userid, form.contents.data, get_time())
+    reply.save()
+    return redirect(url_for('Show_comment', cid = cid, page = 1))
+  return render_template('show_comment.html', page = page, form = form, comment = comment, replylist = replylist)
+
+# @app.route('/reply/pid=<pbid>?')
+# def Reply(pbid):
+#   form = ReplyForm()
 
 
 @app.route('/manage/')

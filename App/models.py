@@ -7,6 +7,8 @@ class User(db.Model):
     password = db.Column(db.String(20), index = True)
     role = db.Column(db.Boolean)
     email = db.Column(db.String(100), unique = True)
+    accnt = db.Column(db.Integer, default = 0)
+    submition = db.Column(db.Integer, default = 0)
 
 
 
@@ -99,6 +101,44 @@ class Submit(db.Model):
         self.time = time
         self.codelen = len(self.code)
 
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        db.session.close()
+
+class Forum(db.Model):
+    id = db.Column(db.Integer,primary_key = True)
+    pbid = db.Column(db.Integer)
+    userid = db.Column(db.String(22))
+    title = db.Column(db.Text)
+    contents = db.Column(db.Text)
+    time = db.Column(db.String(20))
+
+    def __init__(self, pbid, userid, title, contents, time):
+        self.pbid = pbid
+        self.userid = userid
+        self.title = title
+        self.contents = contents
+        self.time = time
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        db.session.close()
+
+class Reply(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    cid = db.Column(db.Integer)
+    userid = db.Column(db.String(22))
+    contents = db.Column(db.Text)
+    time = db.Column(db.String(20))
+
+    def __init__(self, cid, userid, contents, time):
+        self.cid = cid
+        self.userid = userid
+        self.contents = contents
+        self.time = time
 
     def save(self):
         db.session.add(self)

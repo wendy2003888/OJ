@@ -75,3 +75,14 @@ class SubmitForm(Form):
 	code = TextField('Source Code',[
 		validators.DataRequired( message = 'Source Code must not be None.')
 		])
+
+class DiscussForm(Form):
+    title = TextField('Title',[
+        validators.DataRequired( message = 'Please enter Title.')
+        ])
+    contents = TextField('Contents',[
+        validators.DataRequired( message = 'Please enter Contents.')
+        ])
+
+class ReplyForm(Form):
+    contents = TextField('Reply')
