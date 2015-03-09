@@ -3,29 +3,7 @@
 	{% extends "base.html" %}
     {% block content %}
 	<body> 
-		<div class="collapse navbar-collapse" >
-			{% if g.user.is_authenticated() %}
-				 <ul class="nav navbar-nav navbar-right">
-					<li> <a href = {{ g.url }}> {{ g.user.userid }} </a> </li>
-					<li> <a href = "/logout"> Log out </a> </li>
-				</ul>
-			{% else %}
-				<ul class = "nav navbar-nav navbar-right">
-					<li> <a href = "/login"> Login </a> </li>
-					<li> <a href = "/sign_up"> Sign up </a> </li> 
-				</ul>
-			{% endif %}
 		
-			<div class = "main">
-	            <ul class = "nav nav-tabs">
-	                <li> <a href = "/"> Homepage </a> </li>
-	                <li> <a href = {{ url_for("Problems")}}> Problems </a> </li>
-	                <li> <a href = {{ url_for("Status")}}> Status </a> </li> 
-	                <li> <a href = {{ url_for("Ranklist") }}> Ranklist </a> </li>
-	                <li> <a href = "/FAQ/"> F.A.Q </a> </li> 
-	            </ul>
-			</div>
-		</div>
 		<div class = "jumbotron" id = "jumbotron">
 			<div class = "Head">
 				<h1 align="center"> <bold> Welcome to <br/>Online Judge System </bold> </h1>

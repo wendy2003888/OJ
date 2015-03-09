@@ -107,7 +107,7 @@ def Admin():
 def Problems(page = 1):
   pbnum = Problem.query.count()
   pagenum = (pbnum - 1) / ITEMS_ON_PAGE + 1
-  if g.user.is_admin():
+  if g.user.is_authenticated()  and g.user.is_admin():
     problemlist = Problem.query.paginate(page, ITEMS_ON_PAGE, False)
     for i in problemlist.items:
       print i.visible
