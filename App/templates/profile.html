@@ -1,39 +1,10 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<link href = "../static/css/main.css" rel = "stylesheet">
-		<link rel="stylesheet" href="../static/css/bootstrap.css">
-	</head>
+{% extends "base.html" %}
+{% block content %}
 	<body>
-		<div class = "container">
-			<div class="collapse navbar-collapse" >
-			{% if g.user.is_authenticated() %}
-
-				<ul class="nav navbar-nav navbar-right">
-					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                    {{ g.user.userid }}
-                    </button>
-				  <ul class="dropdown-menu" role="menu">
-				    <li role="presentation"> <a role="menuitem" tabindex="-1" href = {{ g.url }}> Profile </a> </li>
-				    <li class="divider"></li>
-				    <li role="presentation"><a role="menuitem" tabindex="-1" href="/manage/">Management</a></li>
-				  </ul>
-					<li> <a href = "/logout"> Log out </a> </li>
-				</ul>
-			{% endif %}
-		
-				<div class = "main">
-		            <ul class = "nav nav-tabs">
-		                <li> <a href = "/"> Homepage </a> </li>
-		                <li> <a href = "/problems/"> Problems </a> </li>
-		                <li> <a href = "/status/"> Status </a> </li> 
-		                <li> <a href = "/FAQ/"> F.A.Q </a> </li>
-		            </ul>
-				</div>
 			<center> <h1>Profile ------  {{ g.user.userid }}</h1> </center>
 			</div>
   					
-	    	<div class = "center" id = "profile">
+	    	<div class = "container-fluid">
 	    		<center>
 					<p class = "center">
 						User ID:
@@ -45,11 +16,16 @@
 						E-mail:
 						{{ g.user.email }}
 						<br/>
-						<a href="{{g.url}}modify" class="btn btn-default" role="button" >Modify </a>
 						<br/>
 						{% if g.user.is_admin() %}
 							<div class="btn-group" role="group" id = "submit">
-								<a href= {{ url_for('Manage')}} class="btn btn-default" role="button"> Manage</a>
+							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+							    Action <span class="caret"></span>
+							  </button>
+							  <ul class="dropdown-menu" role="menu">
+								<li role="presentation"><a href="{{g.url}}modify"  >Modify </a> </li>
+								<li role="presentation"><a href= {{ url_for('Manage')}}> Manage</a> </li>
+								</ul>
 							</div>
 						{% endif %}
 					</p>
@@ -57,5 +33,5 @@
 			</div>
 		</div>
 	</body>
-</html>
+{% endblock %}
 

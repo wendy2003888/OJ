@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link href = "../static/css/main.css" rel = "stylesheet">
+        <link rel="stylesheet" href="../static/css/bootstrap.css">
+        
+    </head>
+    <body id="problem">
+        <div class="container" >
+            <center><h1> Forum </h1> </center>
+            <div class = "nav" id="problem">
+                <ul class = "nav nav-tabs">
+                    <li> <a href = "/"> Homepage </a> </li>
+                    <li> <a href = {{ url_for("Problems")}}> Problems </a> </li>
+                    <li> <a href = {{ url_for("Status")}}> Status </a> </li> 
+                    <li> <a href = "/FAQ/"> F.A.Q </a> </li> 
+                </ul>
+            </div>
+            <center>
+                <div class="contianer">
+                    {% for post in postlist.items %}
+                        <div class="panel panel-default">
+                            <h3 class="panel-title">No.{{ post.id }} {{ post.time }}</h3>
+                            <p><a href = "{{ url_for('Show_comment', cid = post.id) }}">{{ post.title }} </a> </p>
+                        </div>
+                    {% endfor %}
+                    <div id = "form">
+                        <form action = {{url_for('Discuss',pbid = pbid) }} method = 'POST'>
+                        {{ form.csrf_token }}
+                          {% if error %}
+                           <h4>{{ error }}</h4>
+                          {% endif %}
+                                    <label for="title"> {{ form.title.label }} </label> 
+                                    {{ form.title }}
+                                    <br/>
+                                    <label for="contents"> {{ form.contents.label }} </label> 
+                                    </br>
+                                    <textarea class="form-control" rows="5" value＝{{ form.contents }}</textarea></td>
+                                    <br/>
+                              <button type="submit" class="btn btn-default">Save</button>
+                        </form>
+                    </div>
+                    <nav>
+                      <ul class="pagination">
+                        {% if postlist.has_prev %}
+                            <li><a href="{{ url_for('Discuss', pbid = pbid, page = postlist.prev_num) }}">&larr; Previous</a></li>
+                        {% else %}
+                              <li class = "disabled"><a>&larr; Previous</a></li>
+                        {% endif %}
+                        {%- for pg in postlist.iter_pages(0,2,2,0) %}
+                          {% if pg %}
+                            {% if postlist.page != pg %}
+                              <li><a href={{ url_for('Discuss',pbid = pbid, page = pg) }}>{{ pg }} </a> </li>
+                            {% else %}
+                              <li><a href="#" style = "background-color: #428bca; color: white;">{{ page }} </a> </li>
+                            {% endif %}
+                          {% endif %}
+                        {% endfor %}
+                        {% if postlist.has_next %}
+                              <li><a href="{{ url_for('Discuss', pbid = pbid, page = postlist.next_num) }}">Next &rarr;</a></li>
+                          {% else %}
+                              <li class = "disabled"><a>Next &rarr;</a></li>
+                          {% endif %}
+                      </ul>
+                    </nav>
+                </div>
+            </center>
+
+        </div>
+    </body>
+</html>

@@ -1,0 +1,56 @@
+<head>
+    <center> <h1> Rank List</h1> </center>
+</head>
+{% extends "base.html" %}
+{% block content %}
+
+     <body>
+        <div class="container-fluid">
+            <table  class="table table-striped table-bordered">
+                <thread>
+                    <tr>
+                        <th>Rank</th>
+                        <th>UserID</th>
+                        <th>Accepted</th>
+                        <th>Total Submission</th>
+                    </tr>
+                </thread>
+                <tbody>
+                    {% for user in  user_list.items %}
+                    <tr>
+                        <td> {{ strank + user_list.items.index(user) + 1 }} </td>
+                        <td><a href = {{ g.url }}>  {{ user.userid }} </a></td>
+                        <td> {{ user.accnt }} </td>
+                        <td> {{ user.submission }} </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <center>
+        <nav>
+          <ul class="pagination">
+            {% if user_list.has_prev %}
+                <li><a href="{{ url_for('Ranklist', page = user_list.prev_num) }}">&larr; Previous</a></li>
+            {% else %}
+                <li class = "disabled"><a>&larr; Previous</a></li>
+            {% endif %}
+            {%- for pg in user_list.iter_pages(0,2,2,0) %}
+                {% if pg %}
+                    {% if user_list.page != pg %}
+                        <li><a href={{ url_for('Ranklist',page = pg) }}>{{ pg }} </a> </li>
+                    {% else %}
+                        <li><a href="#" style = "background-color: #428bca; color: white;">{{ page }} </a> </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if user_list.has_next %}
+                <li><a href="{{ url_for('Problems', page = user_list.next_num) }}">Next &rarr;</a></li>
+            {% else %}
+                <li class = "disabled"><a>Next &rarr;</a></li>
+            {% endif %}
+          </ul>
+        </nav>
+        </center>
+     </body>
+{% endblock %}

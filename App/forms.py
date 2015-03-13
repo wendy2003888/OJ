@@ -65,7 +65,7 @@ class ProblemForm(Form):
     memorylmt = TextField('Memory Limit',[
         validators.InputRequired(message = 'Please enter Memory Limit.')
         ])
-    visible = SelectField('Language',choices = [('False',False),('True',True)])
+    visible = SelectField('Language',choices = [('False','False'),('True','True')])
 
 class SubmitForm(Form):
 	pbid = TextField('ProblemID', [

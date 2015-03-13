@@ -11,7 +11,12 @@
         <script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     </head>
     <div class="container-fluid">
-        <div class="collapse navbar-collapse" >
+        <div class="collapse navbar-collapse" >        
+            <!-- <div class="btn-group navbar-header" id = "main"> -->
+                <!-- <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown"> -->
+                    <!-- <span class="glyphicon glyphicon-search" aria-hidden="true"></span> -->
+                    <!-- navbar -->
+                <!-- </button> -->
             {% if g.user.is_authenticated() %}
                  <ul class="nav navbar-nav navbar-right">
                     <li> <a href = {{ g.url }}> {{ g.user.userid }} </a> </li>
@@ -23,13 +28,7 @@
                     <li> <a href = "/sign_up"> Sign up </a> </li> 
                 </ul>
             {% endif %}
-        
-            <!-- <div class="btn-group navbar-header" id = "main"> -->
-                <!-- <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown"> -->
-                    <!-- <span class="glyphicon glyphicon-search" aria-hidden="true"></span> -->
-                    <!-- navbar -->
-                <!-- </button> -->
-            <div id = "main">
+
                 <ul class = "nav nav-tabs">
                     <li> <a href = "/"> Homepage </a> </li>
                     <li> <a href = {{ url_for("Problems")}}> Problems </a> </li>
@@ -37,7 +36,6 @@
                     <li> <a href = {{ url_for("Ranklist") }}> Ranklist </a> </li>
                     <li> <a href = "/FAQ/"> F.A.Q </a> </li> 
                 </ul>
-            </div>
         </div>
         <div id = "info">
             <p>{% if g.info %}</p>

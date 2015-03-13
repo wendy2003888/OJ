@@ -1,32 +1,20 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<link rel="stylesheet" type="text/css" href="../static/css/main.css" >
-		<link rel="stylesheet" href="../static/css/bootstrap.css">
-	</head>
+<head>
+	<center> <h1> Submit your solution </h1> </center>
+</head>
+{% extends "base.html" %}
+{% block content %}
 	<body>
 		<div class="container">
-			<div class = "nav">
-	            <ul class = "nav nav-tabs">
-	                <li> <a href = "/"> Homepage </a> </li>
-	                <li> <a href = "/problems/"> Problems </a> </li>
-	                <li> <a href = "#"> Status </a> </li> 
-	                <li> <a href = "#"> F.A.Q </a> </li> 
-	            </ul>
-	    	</div>
-	    	<center> <h1> Submit your solution </h1> </center>
 	    	<form action={{ url_for('Submits', problemid = problem.id) }} method="POST">
         	{{ form.csrf_token }}
 	    	<center>
 	    		{% if error %}
                 	<center> <h3 class="error"> {{ error }} </h3> </center>
            		{% endif %}
-	    		<table>
-	    		<tr>
-	    			<td><label>Problem ID:</label></td>
-	    			<td>{{ form.pbid }}</td>
-	    		</tr>
-	    		</table>
+	    			<label>Problem ID:</label>
+	    			<br/>
+	    			<textarea class="form-group-sm" rows="1"  value = {{ form.pbid }} {{problem.id}} </textarea>
+	    			<br/>
 	    		<label>Language:</label>
 				{{ form.language }}
 				
@@ -41,4 +29,4 @@
 
   		</div>
 	</body>
-</html>
+{% endblock %}
