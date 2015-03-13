@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 
-<head>
-    
-    <center><h1> Register Information </h1></center>
-    <link rel="stylesheet" href="../static/css/Formstyle.css">
+<html>
+    <head>
+        <center><h1> Register Information </h1></center>
+    </head>
+    {% extends "base.html" %}
+    {% block content %}
 
-</head>
 <body>
-    <div class = "nav">
-            <ul>
-                <li> <a href = "/"> Homepage </a> </li>
-                <li> <a href = "/promlems/"> Problems </a> </li>
-                <li> <a href = "#"> Status </a> </li> 
-                <li> <a href = "#"> F.A.Q </a> </li> 
-            </ul>
-    </div>
     <form action = "/sign_up" method="POST" class = "sign_up">
             {{ form.csrf_token }}
             {% if error %}
@@ -41,3 +34,5 @@
             </table>
     </form>
 </body>
+    {% endblock %}
+</html>

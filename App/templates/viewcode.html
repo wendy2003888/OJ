@@ -1,36 +1,15 @@
 <!DOCTYPE html>
 <html>
-	<head>
-	 	<link href = "../static/css/main.css" rel = "stylesheet">
-	 	<link rel="stylesheet" href="../static/css/bootstrap.css">
-	</head>
+	{% extends "base.html" %}
+    {% block content %}
 	<body>
 		<center> <h1> Source Code </h1> </center>
 		<div class="container">
-		 	<div class="collapse navbar-collapse" >
-			 	{% if g.user.is_authenticated() %}
-					 <ul class="nav navbar-nav navbar-right">
-						<li> <a href = {{ g.url }}> {{ g.user.userid }} </a> </li>
-						<li> <a href = "/logout"> Log out </a> </li>
-					</ul>
-				{% else %}
-					<ul class = "nav navbar-nav navbar-right">
-						<li> <a href = "/login"> Login </a> </li>
-						<li> <a href = "/sign_up"> Sign up </a> </li> 
-					</ul>
-				{% endif %}
-				<ul class = "nav nav-tabs">
-					<ul class = "nav nav-tabs">
-	                <li> <a href = "/"> Homepage </a> </li>
-	                <li> <a href = "/problems/"> Problems </a> </li>
-	                <li> <a href = "/status/"> Status </a> </li> 
-	                <li> <a href = "#"> F.A.Q </a> </li> 
-	            </ul>
-			</div>
 			<div id = "jumbotron">
 				<code>{{ submit.code }}</code>
 			</div>
 
 		</div>
 	</body>
+	{% endblock %}
 </html>
