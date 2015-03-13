@@ -75,7 +75,7 @@ def Store_code(runid, name):
 
 def compile(runid, language):
 	build_cmd = {
-	'G++' : 'g++ main.cpp -o main -O2 -Wall -lm  -DONLINE_JUDGE',
+	'G++' : 'g++ main.cpp -o main -O2 -Wall -lm --static -DONLINE_JUDGE',
 	'C' : 'gcc main.c -o main -Wall -lm -O2 -std=c99 -DONLINE_JUDGE',
 	'C++' : 'c++ main.cpp -o main -O2 -Wall -lm -DONLINE_JUDGE',
 	'Python2.7' : 'python2.7 -m py_compile main.py'
