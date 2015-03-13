@@ -36,10 +36,10 @@ PYTHON_MEMORY_LIMIT_TIMES = 10
 
 JUDGE_RESULT = {
     0: 'Accepted',
-    1: 'Wrong Answer',
+    1: 'Presentation Error',
     2: 'Time Limit Exceeded',
     3: 'Memory Limit Exceeded',
-    4: 'Presentation Error',
+    4: 'Wrong Answer',
     5: 'Runtime Error',
     6: 'Output Limit Exceeded',
     7: 'Compile Error',
