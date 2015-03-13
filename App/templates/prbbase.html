@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html>
+<center><h1> {{ problem.title }} </h1> </center>
+{% extends "base.html" %}
+{% block content %}
 	<head>
 		<link href = "../static/css/main.css" rel = "stylesheet">
-		<link rel="stylesheet" href="../static/css/bootstrap.css">
 		
 	</head>
 	<body id="problem">
 		<div class="container" >
-			<center><h1> {{ problem.title }} </h1> </center>
-			<div class = "nav" id="problem">
-	            <ul class = "nav nav-tabs">
-	                <li> <a href = "/"> Homepage </a> </li>
-	                <li> <a href = {{ url_for("Problems")}}> Problems </a> </li>
-	                <li> <a href = {{ url_for("Status")}}> Status </a> </li> 
-	                <li> <a href = "/FAQ/"> F.A.Q </a> </li> 
-	            </ul>
-	    	</div>
+
 	    	<div>
 	    	</div>
 			<div id="jumbotron">
@@ -43,4 +35,4 @@
 			</center>
 		</div>
 	</body>
-</html>
+{% endblock %}

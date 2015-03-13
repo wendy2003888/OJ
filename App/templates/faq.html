@@ -1,36 +1,10 @@
-
+<head>
+	<center> <h1> F.A.Q </h1> </center>
+</head>
 {% extends "base.html" %}
 {% block content %}
-	<head>
-		<center> <h1> F.A.Q </h1> </center>
-	</head>
+
 	<body>
-		<div class="collapse navbar-collapse" >
-		 	{% if g.user.is_authenticated() %}
-				 <ul class="nav navbar-nav navbar-right">
-					<li> <a href = {{ g.url }}> {{ g.user.userid }} </a> </li>
-					<li> <a href = "/logout"> Log out </a> </li>
-				</ul>
-			{% else %}
-				<ul class = "nav navbar-nav navbar-right">
-					<li> <a href = "/login"> Login </a> </li>
-					<li> <a href = "/sign_up"> Sign up </a> </li> 
-				</ul>
-			{% endif %}
-			<ul class = "nav nav-tabs">
-				<ul class = "nav nav-tabs">
-                <li> <a href = "/"> Homepage </a> </li>
-                <li> <a href = {{ url_for("Problems", page = 1)}}> Problems </a> </li>
-                <li> <a href = {{ url_for("Status", page = 1)}}> Status </a> </li> 
-                <li> <a href = "/FAQ/"> F.A.Q </a> </li>
-            </ul>
-			</ul>
-			{% if g.user.is_admin() %}
-				<ul class="nav navbar-nav navbar-right">
-					<li>  <a href = "/addprb"> Add problem </a> </li>
-				</ul>
-			{% endif %}
-		</div>
 		<div class="container">
 			<div class = "jumbotron" id = "jumbotron">
 				<p>

@@ -1,31 +1,10 @@
-<!DOCTYPE html>
-<html>
+<center> <h1> Status </h1> </center>
+{% extends "base.html" %}
+{% block content %}
 	 <head>
-	 	<link href = "../static/css/main.css" rel = "stylesheet">
-	 	<link rel="stylesheet" href="../static/css/bootstrap.css">
-	 	<center> <h1> Problems </h1> </center>
 	 </head>
 	 <body>
-	 	<div class="container">
-		 	<div class="collapse navbar-collapse" >
-			 	{% if g.user.is_authenticated() %}
-					 <ul class="nav navbar-nav navbar-right">
-						<li> <a href = {{ g.url }}> {{ g.user.userid }} </a> </li>
-						<li> <a href = "/logout"> Log out </a> </li>
-					</ul>
-				{% else %}
-					<ul class = "nav navbar-nav navbar-right">
-						<li> <a href = "/login"> Login </a> </li>
-						<li> <a href = "/sign_up"> Sign up </a> </li> 
-					</ul>
-				{% endif %}
-	            <ul class = "nav nav-tabs">
-	                <li> <a href = "/"> Homepage </a> </li>
-	                <li> <a href = {{ url_for("Problems")}}> Problems </a> </li>
-	                <li> <a href = {{ url_for("Status")}}> Status </a> </li> 
-	                <li> <a href = "/FAQ/"> F.A.Q </a> </li> 
-	            </ul>
-			</div>
+	 	<div class="container-fluid">
 			<div id = "jumbotron">
 				<table  class="table table-striped table-bordered">
 					<thread>
@@ -81,8 +60,6 @@
 		  </ul>
 		</nav>
 		</center>
-	 	<script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
-		<script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	 </body>
 	 
-</html>
+{% endblock %}
