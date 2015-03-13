@@ -36,6 +36,7 @@ def Homepage():
   return render_template('homepage.html')
 
 @app.route('/<userid>/')
+@login_required
 def Profile(userid):
   return render_template('profile.html')
 
