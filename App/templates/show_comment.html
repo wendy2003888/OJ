@@ -1,21 +1,10 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link href = "../static/css/main.css" rel = "stylesheet">
-        <link rel="stylesheet" href="../static/css/bootstrap.css">
-        
-    </head>
+  {% extends "base.html" %}
+    {% block content %}
     <body id="problem">
         <div class="container" >
             <center><h1> {{ comment.title }} </h1> </center>
-            <div class = "nav" id="problem">
-                <ul class = "nav nav-tabs">
-                    <li> <a href = "/"> Homepage </a> </li>
-                    <li> <a href = {{ url_for("Problems")}}> Problems </a> </li>
-                    <li> <a href = {{ url_for("Status")}}> Status </a> </li> 
-                    <li> <a href = "/FAQ/"> F.A.Q </a> </li> 
-                </ul>
-            </div>
             <center>
                 <div class="contianer">
                     <div>
@@ -69,4 +58,5 @@
 
         </div>
     </body>
+  {% endblock %}
 </html>

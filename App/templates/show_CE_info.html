@@ -1,33 +1,10 @@
 <!DOCTYPE html>
 <html>
-	 <head>
-	 	<link href = "../static/css/main.css" rel = "stylesheet">
-	 	<link rel="stylesheet" href="../static/css/bootstrap.css">
-	 	<center> <h1> Problems </h1> </center>
-	 </head>
+	{% extends "base.html" %}
+    {% block content %}
+	 	<center> <h1> CEinformation </h1> </center>
 	 <body>
 	 	<div class="container">
-		 	<div class="collapse navbar-collapse" >
-			 	{% if g.user.is_authenticated() %}
-					 <ul class="nav navbar-nav navbar-right">
-						<li> <a href = {{ g.url }}> {{ g.user.userid }} </a> </li>
-						<li> <a href = "/logout"> Log out </a> </li>
-					</ul>
-				{% else %}
-					<ul class = "nav navbar-nav navbar-right">
-						<li> <a href = "/login"> Login </a> </li>
-						<li> <a href = "/sign_up"> Sign up </a> </li> 
-					</ul>
-				{% endif %}
-				<ul class = "nav nav-tabs">
-					<ul class = "nav nav-tabs">
-		                <li> <a href = "/"> Homepage </a> </li>
-		                <li> <a href = {{ url_for("Problems", page = 1)}}> Problems </a> </li>
-		                <li> <a href = {{ url_for("Status", page = 1)}}> Status </a> </li> 
-		                <li> <a href = "/FAQ/"> F.A.Q </a> </li> 
-	            	</ul>
-				</ul>
-			</div>
 			<div id = "jumbotron">
 			 <p>
 			  {{ submit.CEmsg }}
@@ -38,4 +15,5 @@
 		<script src="http://cdn.bootcss.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 	 </body>
 	 
+	{% endblock %}
 </html>
