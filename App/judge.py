@@ -1,5 +1,5 @@
 import os, subprocess, shlex, Queue, time
-# import lorun
+import lorun
 
 from config import JUDGE_RESULT,PRB_FOLDER,JUDGE_FOLDER, PYTHON_TIME_LIMIT_TIMES, PYTHON_MEMORY_LIMIT_TIMES, QUEUE_SIZE, WAIT_TIME
 from models import Problem, Submit, User
@@ -125,16 +125,16 @@ def Judge(runid, pbid, language):
     'timelimit': timelmt,
     'memorylimit': memorylmt
     }
-    # rst = lorun.run(runcfg)
+    rst = lorun.run(runcfg)
     inputfile.close()
     tmpfile.close()
     tmpfile = open(os.path.join(JUDGE_FOLDER, str(runid)))
 
-    return ('Accepted', None)
-# if rst['result'] == 0:
-#   crst = lorun.check(outputfile.fileno(), tmpfile.fileno())
+    #return ('Accepted', None)
+    if rst['result'] == 0:
+        crst = lorun.check(outputfile.fileno(), tmpfile.fileno())
 #        #lorun.check() returns a number which means the final result
-#        outputfile.close()
-#        tmpfile.close()
-#        rst['result'] = crst
-# return JUDGE_RESULT[rst['result']],rst
+        outputfile.close()
+        tmpfile.close()
+        rst['result'] = crst
+    return JUDGE_RESULT[rst['result']],rst
