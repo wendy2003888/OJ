@@ -45,7 +45,7 @@ def worker():
 
         Submit.query.filter_by(runid = runid).update({'result': 'Runing'})
         result, rst = Judge(runid, pbid, language)
-
+        print pbid,result, rst
         problem = Problem.query.get(pbid)
         user = User.query.get(userid)
         if result == 'Accepted':
